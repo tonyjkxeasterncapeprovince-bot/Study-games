@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07090e">
+  <title>Study Games — Math, Science, Social Studies, ELA & More</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080b12;--panel:#101522;--panel2:#151c2b;--border:#273146;--muted:#a0aec6;--accent:#7b9cff;--green:#4de3a0;--red:#ff798b;--text:#f3f6ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse 65% 32% at 50% -10%,#24375b 0,transparent 85%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    .wrap{max-width:1100px;padding:26px 22px 80px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:50px} .brand{display:flex;gap:12px;align-items:center;font-weight:850;font-size:20px;letter-spacing:.3px}.mark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(140deg,#547cff,#9d64e9);color:white;font-size:22px;box-shadow:0 8px 30px #687bff35}.header-pill{border:1px solid var(--border);border-radius:100px;padding:7px 12px;color:var(--muted);font-size:12px}
+    .eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px}.hero h1{font-size:clamp(35px,6vw,60px);line-height:1.08;letter-spacing:-2px;margin:0 0 13px}.hero p{color:var(--muted);max-width:670px;margin:0 0 28px}.hero .grad{background:linear-gradient(100deg,#93adff,#d2a4ff);color:transparent;background-clip:text}
+    .search{display:flex;gap:10px;margin-bottom:10px}.search input{min-width:0;flex:1;background:#111827;border:1px solid #33405c;color:white;border-radius:14px;padding:15px 16px}.button,.search button{border:0;border-radius:13px;padding:12px 18px;background:var(--accent);color:#071025;font-weight:800}.hint{font-size:12px;color:var(--muted)}section{margin-top:45px}.sec-head{display:flex;align-items:baseline;gap:15px;margin-bottom:16px}.sec-head h2{font-size:22px;letter-spacing:-.4px;margin:0}.sec-head span{font-size:13px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .game-card{background:linear-gradient(145deg,#172033,#0f1521);border:1px solid var(--border);border-radius:19px;padding:19px;min-height:196px;display:flex;flex-direction:column;align-items:flex-start;transition:border-color .15s,transform .15s}.game-card:hover{border-color:#7188bb;transform:translateY(-2px)}.game-icon{width:53px;height:53px;display:grid;place-items:center;border-radius:15px;font-size:27px;margin-bottom:17px}.game-card h3{font-size:17px;margin:0 0 4px}.game-card p{font-size:13px;color:var(--muted);margin:0 0 15px;flex:1}.game-card button{border:1px solid #45557b;background:#273859;color:#e3ebff;border-radius:9px;font-size:13px;font-weight:750;padding:7px 14px}
+    .links{display:flex;flex-wrap:wrap;gap:10px}.links a{background:var(--panel);border:1px solid var(--border);padding:10px 16px;border-radius:11px;text-decoration:none;color:#d8e2fb;font-weight:650;font-size:14px}.links a:hover{border-color:var(--accent)}.foot{font-size:12px;color:var(--muted);margin-top:45px}
+    dialog{border:1px solid #35415a;border-radius:20px;background:#0e1420;color:var(--text);width:min(94vw,610px);max-height:92dvh;overflow:auto;padding:24px;box-shadow:0 25px 100px #000b}dialog::backdrop{background:#000c;backdrop-filter:blur(5px)}.dialog-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.dialog-top h2{margin:0;font-size:23px}.close{background:#212b40;color:#f1f5ff;border:0;border-radius:9px;padding:6px 12px;font-size:18px}.stats{color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;margin:17px 0}.arena{display:grid;place-items:center;padding:8px 0 12px}.snake-board{display:block;width:min(100%,380px);height:auto;aspect-ratio:1;background:#080e17;border:1px solid var(--border);border-radius:12px}.controls{display:grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,45px);justify-content:center;gap:6px;margin:12px auto}.controls button{background:#273650;border:1px solid #4b5d81;color:#e9f0ff;border-radius:9px;font-size:20px;touch-action:manipulation}.ctrl-up{grid-column:2}.ctrl-left{grid-column:1;grid-row:2}.ctrl-down{grid-column:2;grid-row:2}.ctrl-right{grid-column:3;grid-row:2}.game-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.game-actions button{background:#273650;border:1px solid #4b5d81;color:white;padding:9px 14px;border-radius:10px}.ttt{display:grid;grid-template-columns:repeat(3,91px);gap:7px}.ttt button{width:91px;height:91px;border-radius:12px;border:1px solid #3a4b70;background:#1b2942;color:#b2c4ff;font-size:48px;font-weight:800}.message{text-align:center;min-height:24px;color:var(--green);margin:9px}.memory{display:grid;grid-template-columns:repeat(4,minmax(0,80px));gap:8px;justify-content:center}.memory button{height:79px;border:1px solid #445579;background:#1b2942;border-radius:12px;font-size:29px;color:white}.memory button[disabled]{opacity:.8}.subtle{color:var(--muted);font-size:13px;text-align:center;margin:0 0 10px}
+    @media(max-width:700px){header{margin-bottom:35px}.grid{grid-template-columns:1fr}.game-card{min-height:155px}.search{flex-direction:column}.search button{width:100%}.wrap{padding:18px 17px 55px}.header-pill{display:none}dialog{padding:17px}.ttt{grid-template-columns:repeat(3,75px)}.ttt button{height:75px;width:75px}.memory{grid-template-columns:repeat(4,minmax(0,65px))}.memory button{height:64px}}
+    .saved-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}.saved-item{border:1px solid var(--border);border-radius:12px;background:var(--panel);display:flex;align-items:center;gap:8px;padding:5px 6px 5px 13px;max-width:100%}.saved-item a{color:#e2ebff;text-decoration:none;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}.saved-item a:hover{text-decoration:underline}.saved-item button{border:0;background:#273146;border-radius:8px;color:#e2ebff;padding:4px 9px}.saved-empty{color:var(--muted);font-size:14px;margin:0}.reaction-pad{border:2px solid #5476a0;border-radius:16px;background:#213047;color:#ecf4ff;padding:35px 10px;display:grid;place-items:center;min-height:210px;text-align:center;width:100%;font-weight:800;font-size:22px;touch-action:manipulation}.reaction-pad.ready{background:#216c46;border-color:#4cefa5}.reaction-pad.early{background:#713d4c;border-color:#fd8b9e}
+    #saveForm{flex-wrap:wrap}#saveForm input{flex:1 1 190px}#saveForm button{flex:0 0 auto}
+
+    /* Screen-capture lab integration: simulated preview, no monitoring changes */
+    .lab-teaser{background:linear-gradient(120deg,#18223b,#14172a);border:1px solid #3c4865;border-radius:20px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+    .lab-teaser h3{font-size:21px;margin:0 0 7px}.lab-teaser p{margin:0;max-width:640px;color:var(--muted);font-size:14px}.lab-teaser button{border:0;border-radius:12px;background:#9fc0ff;color:#0b1325;font-weight:800;padding:12px 18px;white-space:nowrap}
+    #labDialog{width:min(96vw,1180px);max-height:96dvh;padding:16px 16px 12px;overflow:hidden}
+    #labDialog .dialog-top{margin-bottom:10px}
+    #labDialog .lab-notice{font-size:12px;color:var(--muted);margin:0 0 9px}
+    #labFrame{border:0;display:block;width:100%;height:calc(95dvh - 106px);background:#090b11;border-radius:12px}
+    @media(max-width:700px){#labDialog{padding:10px}#labFrame{height:calc(96dvh - 106px)}}
+
+    /* Learning game UI */
+    .study-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:15px}
+    .study-card{background:linear-gradient(150deg,#15213a,#101624);border:1px solid var(--border);border-radius:18px;padding:19px;display:flex;flex-direction:column;align-items:flex-start;min-height:182px}
+    .study-card .emblem{font-size:30px;margin-bottom:8px}.study-card h3{font-size:18px;margin:0 0 5px}.study-card p{color:var(--muted);font-size:13px;flex:1;margin:0 0 14px}
+    .study-card button{border:1px solid #4d6090;background:#293c64;color:#eef3ff;border-radius:10px;padding:9px 14px;font-weight:750}
+    .study-card button:hover{background:#354b7a}
+    #studyDialog{width:min(94vw,650px)}
+    .quiz-top{display:flex;gap:12px;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin:17px 0 8px}
+    .progress-track{height:7px;border-radius:999px;background:#253249;overflow:hidden;margin-bottom:19px}
+    .progress-fill{width:0%;height:100%;background:linear-gradient(90deg,#69b8ff,#6ce3bd);transition:width .25s}
+    .quiz-question{font-size:21px;line-height:1.35;letter-spacing:-.3px;font-weight:800;margin:14px 0 19px}
+    .quiz-choices{display:grid;gap:10px}.quiz-choices button{background:#19263d;border:1px solid #3e5073;border-radius:12px;text-align:left;padding:13px 16px;color:#f6f7ff;line-height:1.4;min-height:51px}
+    .quiz-choices button:hover:not(:disabled){background:#2c3d5d}.quiz-choices button:disabled{cursor:default;opacity:.9}
+    .quiz-choices button.correct{border-color:#6ce5a9;background:#183e37}.quiz-choices button.incorrect{border-color:#ed91a5;background:#412330}
+    .quiz-feedback{color:#d6e5fc;min-height:47px;font-size:14px;margin:16px 0 12px}
+    .quiz-next{border:0;background:#a5bdff;color:#0d1831;font-weight:850;border-radius:11px;padding:11px 20px}
+    .quiz-next:disabled{opacity:.45;cursor:not-allowed}
+    .quiz-summary{text-align:center;padding:22px 5px}.quiz-summary h3{font-size:25px;margin:5px 0 10px}.quiz-summary p{color:var(--muted);margin:0 0 22px}
+    @media(max-width:700px){.quiz-question{font-size:18px}.study-grid{grid-template-columns:1fr 1fr}.study-card{min-height:180px}}
+    @media(max-width:430px){.study-grid{grid-template-columns:1fr}}
+
+    /* Transparent, in-page browser frame: standard iframe, no proxy or monitoring interference. */
+    .web-panel{border:1px solid #364662;background:#0d1422;border-radius:19px;overflow:hidden;box-shadow:0 20px 50px #0003}
+    .web-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:#182239;padding:13px 16px;border-bottom:1px solid #364662}
+    .web-toolbar-info{min-width:0;flex:1}.web-toolbar-info strong{display:block;font-size:14px}.web-location{font-size:12px;color:#aec4ed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:100%}
+    .web-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.web-actions a,.web-actions button{border:1px solid #455a80;border-radius:9px;background:#253757;color:#eef4ff;text-decoration:none;padding:9px 11px;font-size:13px;font-weight:750}
+    .web-actions a[aria-disabled="true"]{opacity:.45;pointer-events:none}
+    .web-warning{padding:10px 16px;background:#101b2b;color:#b9c9e3;font-size:12px;border-bottom:1px solid #293c58}
+    #webFrame{display:none;width:100%;height:clamp(390px,65vh,760px);border:0;background:white}
+    .web-placeholder{min-height:215px;display:grid;place-items:center;text-align:center;padding:30px;color:#b9c9e3}
+    .web-placeholder strong{display:block;color:#fff;font-size:18px;margin-bottom:7px}
+    @media(max-width:700px){.web-toolbar{align-items:stretch}.web-toolbar-info{flex:1 1 100%}#webFrame{height:63vh;min-height:380px}}
+
+    [hidden]{display:none!important}
+    .study-panel{margin-top:20px;padding:22px;border:1px solid #465a83;border-radius:18px;background:#101b2e;box-shadow:0 14px 35px #0005;scroll-margin-top:12px}
+    .study-panel .dialog-top{margin-bottom:12px}
+    .study-panel .quiz-choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .viewer-help{margin:12px;padding:14px;border:1px solid #516b9f;border-radius:12px;background:#1b2941;color:#dbe7ff;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px}
+    .viewer-help strong{display:block;font-size:14px;color:white;margin-bottom:3px}
+    .viewer-help a{padding:9px 12px;border-radius:9px;background:#bcd0ff;color:#0b1a34;font-weight:800;white-space:nowrap;text-decoration:none}
+    @media(max-width:700px){.study-panel .quiz-choices{grid-template-columns:1fr}.study-panel{padding:15px}}
+    /* Internal browser tabs: these are ordinary iframes, not new browser tabs. */
+    .internal-tabs{display:flex;align-items:center;gap:7px;overflow-x:auto;padding:9px 10px 0;background:#0e1627;min-height:51px;border-bottom:1px solid #2a3651;scrollbar-width:thin}
+    .internal-tab{flex:0 0 auto;max-width:210px;display:flex;align-items:center;border:1px solid #344764;border-bottom:none;border-radius:11px 11px 0 0;background:#172238;color:#ccd9f1;min-height:41px}
+    .internal-tab[aria-selected="true"]{background:#293a5e;color:white;border-color:#6d91df}
+    .internal-tab .tab-switch{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:transparent;border:0;color:inherit;font-weight:700;font-size:13px;padding:10px 8px 10px 13px}
+    .internal-tab .tab-close{color:inherit;background:transparent;border:0;font-weight:900;opacity:.78;padding:9px 11px 9px 5px}
+    .tab-frames{width:100%;background:#f7f9ff}
+    .tab-frames iframe{width:100%;height:clamp(390px,65vh,760px);border:0;display:block;background:white}
+    .tab-frames iframe[hidden]{display:none}
+    .web-warning{line-height:1.5}
+    @media(max-width:700px){.tab-frames iframe{height:63vh;min-height:380px}.internal-tab{max-width:170px}.internal-tab .tab-switch{max-width:132px}}
+  </style>
+</head>
+<body>
+ <div class="wrap">
+  <header><div class="brand"><span class="mark" aria-hidden="true">✦</span> Study Games</div><div class="header-pill">MATH • SCIENCE • SOCIAL STUDIES • ELA • MORE</div></header>
+  <main>
+   <div class="hero">
+    <p class="eyebrow">Learning, practice, and play</p>
+    <h1>Learn something <span class="grad">new.</span></h1>
+    <p>Practice math, science, social studies, English language arts (ELA), and more through quick quizzes. You can also play classic browser games, save useful links, and open supported websites in tabs inside this page.</p>
+    <form id="addressForm" class="search" autocomplete="off"><input id="address" aria-label="Website address or search" placeholder="Search the web or enter a website address…" required><button type="submit">Go to website in Study Games ↓</button></form>
+    <div class="hint">New destinations open as tabs inside Study Games, not as new browser tabs. Sites that prevent embedded viewing will still refuse to display. School monitoring and filters continue to apply.</div>
+   </div>
+
+
+   <section id="webViewer" aria-labelledby="webHeading">
+    <div class="sec-head"><h2 id="webHeading">Study Games tabs</h2><span>One browser tab • Multiple internal pages</span></div>
+    <div class="web-panel">
+      <div class="internal-tabs" id="internalTabs" role="tablist" aria-label="Websites inside Study Games"></div>
+      <div class="web-toolbar">
+        <div class="web-toolbar-info"><strong id="webTitle">Ready to browse</strong><span class="web-location" id="webLocation">Your pages open in the area below</span></div>
+        <div class="web-actions">
+          <button type="button" id="testViewer">Open demo tab</button>
+          <button type="button" id="closeWeb">Close current tab</button>
+          <a id="externalOpen" href="https://example.com/" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Open original site ↗</a>
+        </div>
+      </div>
+      <div class="web-warning" id="viewerInfo">Only websites that permit embedding can display here. A blank frame or “refused to connect” usually means the destination does not allow it. This does not change school monitoring.</div>
+      <div id="viewerHelp" class="viewer-help" hidden><div><strong id="viewerHelpTitle">Website not showing?</strong><div id="viewerHelpText">This website may block being displayed inside another website. Study Games cannot override that restriction.</div></div><span>Try the demo tab to check the viewer</span></div>
+      <div class="web-placeholder" id="webPlaceholder"><div><div style="font-size:42px" aria-hidden="true">🌐</div><strong>Your website tabs will appear here</strong>Type a website address above and select “Go to website in Study Games.”</div></div>
+      <div id="tabFrames" class="tab-frames" aria-label="Embedded website tabs"></div>
+    </div>
+    <p class="hint" id="webStatus" role="status" aria-live="polite" style="margin-top:10px">Choose “Open demo tab” for a guaranteed working offline example.</p>
+   </section>
+
+   <section id="subjects" aria-labelledby="subjectsHeading">
+    <div class="sec-head"><h2 id="subjectsHeading">Study games by subject</h2><span>Quick quizzes • Instant feedback</span></div>
+    <div class="study-grid">
+     <article class="study-card"><div class="emblem" aria-hidden="true">🔢</div><h3>Math</h3><p>Fractions, algebra, percentages, and geometry.</p><button type="button" data-subject="math">Practice Math →</button></article>
+     <article class="study-card"><div class="emblem" aria-hidden="true">🔬</div><h3>Science</h3><p>Space, cells, energy, and the natural world.</p><button type="button" data-subject="science">Practice Science →</button></article>
+     <article class="study-card"><div class="emblem" aria-hidden="true">🏛️</div><h3>Social Studies</h3><p>History, government, and civics.</p><button type="button" data-subject="social">Practice Social Studies →</button></article>
+     <article class="study-card"><div class="emblem" aria-hidden="true">📖</div><h3>ELA</h3><p>Grammar, vocabulary, and reading skills.</p><button type="button" data-subject="ela">Practice ELA →</button></article>
+     <article class="study-card"><div class="emblem" aria-hidden="true">🌎</div><h3>Geography & More</h3><p>Maps, countries, and computer science basics.</p><button type="button" data-subject="more">Explore More →</button></article>
+    </div>
+   </section>
+  <section id="studyPanel" class="study-panel" aria-labelledby="studyTitle" hidden>
+   <div class="dialog-top"><h2 id="studyTitle">Study Challenge</h2><button class="close" id="closeStudy" type="button" aria-label="Close study challenge">✕</button></div>
+   <div id="studyArea">
+    <div class="quiz-top"><span id="quizStep">Question 1 of 7</span><span id="quizScore">Score: 0</span></div>
+    <div class="progress-track" aria-label="Quiz progress"><div id="quizProgress" class="progress-fill"></div></div>
+    <p id="quizQuestion" class="quiz-question"></p>
+    <div id="quizChoices" class="quiz-choices" role="group" aria-label="Answer choices"></div>
+    <p id="quizFeedback" class="quiz-feedback" role="status" aria-live="polite"></p>
+    <button id="quizNext" class="quiz-next" type="button" disabled>Next question →</button>
+   </div>
+  </section>
+   <section><div class="sec-head"><h2>More games</h2><span>Play instantly • No installation</span></div><div class="grid">
+    <article class="game-card"><div class="game-icon" style="background:#214638">🐍</div><h3>Neon Snake</h3><p>Collect the glowing snacks. Don't run into the walls or yourself.</p><button type="button" data-game="snake">Play Snake →</button></article>
+    <article class="game-card"><div class="game-icon" style="background:#31366b">⭕</div><h3>Tic-Tac-Toe</h3><p>Take turns with a friend on the same device. Get three in a row.</p><button type="button" data-game="ttt">Play Tic-Tac-Toe →</button></article>
+    <article class="game-card"><div class="game-icon" style="background:#4c304c">🃏</div><h3>Memory Flip</h3><p>Reveal the cards and find all eight matching pairs.</p><button type="button" data-game="memory">Play Memory →</button></article>
+    <article class="game-card"><div class="game-icon" style="background:#324b53">⚡</div><h3>Reaction Rush</h3><p>Wait for green, then click as quickly as you can.</p><button type="button" data-game="reaction">Play Reaction Rush →</button></article>
+   </div></section>
+
+   <!-- Embedded screen capture lab -->
+   <section aria-labelledby="labTitle">
+     <div class="sec-head"><h2 id="labTitle">Screen Capture Lab</h2><span>Interactive educational simulator</span></div>
+     <div class="lab-teaser"><div><h3>See how previews can fail</h3><p>Compare a moving scene to an example preview. Try normal, black, frozen, and delayed preview modes. All effects exist only in the demonstration — they do not hide your screen from GoGuardian or another recorder.</p></div><button id="openLab" type="button">Launch simulator ↗</button></div>
+   </section>
+   <section aria-labelledby="savedTitle"><div class="sec-head"><h2 id="savedTitle">My saved links</h2><span>Save any normal study or game link</span></div>
+    <form id="saveForm" class="search" autocomplete="off"><input id="gameName" aria-label="Link name" placeholder="Website name" maxlength="50" required><input id="gameUrl" aria-label="Game website link" placeholder="https://example.com/game" required><button type="submit">Add link</button></form>
+    <p id="saveMessage" class="hint" role="status">Links are stored only in this browser. Select a saved link to open an internal Study Games tab.</p>
+    <div id="savedLinks" class="saved-links"></div>
+   </section>
+   <section><div class="sec-head"><h2>Quick links</h2><span>Popular creative & learning sites</span></div><nav class="links" aria-label="Quick links"><a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer">Scratch</a><a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a><a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer">Khan Academy</a><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a></nav></section>
+  </main><p class="foot">Study Games includes educational quizzes, casual games, and a simulated screen-capture demonstration. It does not bypass school filters or change monitoring.</p>
+ </div>
+
+
+ <dialog id="gameDialog" aria-label="Game"><div class="dialog-top"><h2 id="gameTitle">Game</h2><button class="close" id="closeDialog" type="button" aria-label="Close game">✕</button></div><div id="gameContent"></div></dialog>
+ <dialog id="labDialog" aria-label="Screen Capture Lab simulator"><div class="dialog-top"><h2>Screen Capture Lab</h2><button class="close" id="closeLab" type="button" aria-label="Close simulator">✕</button></div><p class="lab-notice">Simulation only — this does not change the way other software captures your screen.</p><iframe id="labFrame" title="Interactive screen capture simulator" sandbox="allow-scripts" loading="lazy"></iframe></dialog>
+ <script>
+ (()=>{
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s);
+  const dialog=$('#gameDialog'),gameContent=$('#gameContent');
+  let dispose=()=>{};
+  const webViewer=$('#webViewer');
+  const webPlaceholder=$('#webPlaceholder');
+  const externalOpen=$('#externalOpen');
+  const webLocation=$('#webLocation'),webTitle=$('#webTitle'),webStatus=$('#webStatus');
+  const tabStrip=$('#internalTabs'),frameArea=$('#tabFrames');
+  let browserTabs=[], currentTabId=null, nextTabId=1;
+  function parseWebsite(raw){
+    const query=raw.trim();if(!query)return null;
+    let url;
+    try{
+      if(/^https?:\/\//i.test(query))url=new URL(query);
+      else if(/^[\w.-]+\.[a-z]{2,}(?::\d+)?(?:[\/\?#].*)?$/i.test(query) && !/\s/.test(query))url=new URL('https://'+query);
+      else url=new URL('https://www.google.com/search?q='+encodeURIComponent(query));
+      if(!['http:','https:'].includes(url.protocol)||!url.hostname||url.username||url.password)throw Error('Invalid address');
+      return url;
+    }catch{return null}
+  }
+  function refreshTabUi(){
+    tabStrip.replaceChildren();
+    const active=browserTabs.find(t=>t.id===currentTabId)||null;
+    browserTabs.forEach(t=>{
+      const wrapper=document.createElement('div');wrapper.className='internal-tab';
+      wrapper.setAttribute('aria-selected',String(t.id===currentTabId));
+      const activate=document.createElement('button');activate.type='button';activate.className='tab-switch';activate.textContent=t.label;activate.title=t.url||'Offline demo';activate.setAttribute('role','tab');activate.setAttribute('aria-selected',String(t.id===currentTabId));
+      activate.addEventListener('click',()=>selectTab(t.id));
+      const close=document.createElement('button');close.type='button';close.className='tab-close';close.textContent='×';close.setAttribute('aria-label','Close '+t.label);close.addEventListener('click',()=>closeTab(t.id));
+      wrapper.append(activate,close);tabStrip.append(wrapper);
+      t.frame.hidden=t.id!==currentTabId;
+    });
+    webPlaceholder.hidden=!!active;
+    if(active){
+      webTitle.textContent=active.label;
+      webLocation.textContent=active.url||'Offline demo (part of Study Games)';
+      webLocation.title=active.url||'';
+      if(active.url){externalOpen.href=active.url;externalOpen.setAttribute('aria-disabled','false');externalOpen.removeAttribute('tabindex')}
+      else{externalOpen.setAttribute('aria-disabled','true');externalOpen.setAttribute('tabindex','-1')}
+      $('#viewerHelp').hidden=!active.url;
+      webStatus.textContent=active.url?'Internal tab opened: '+active.label+'. If the content remains blank, this website may prohibit embedding.':'Demo tab opened inside Study Games. No separate browser tab was created.';
+    }else{
+      webTitle.textContent='Ready to browse';webLocation.textContent='Your pages open in the area below';webLocation.removeAttribute('title');
+      externalOpen.setAttribute('aria-disabled','true');externalOpen.setAttribute('tabindex','-1');
+      $('#viewerHelp').hidden=true;
+      webStatus.textContent='No tabs open. Enter a URL or select “Open demo tab”.';
+    }
+  }
+  function selectTab(id){
+    if(!browserTabs.some(t=>t.id===id))return;
+    currentTabId=id;refreshTabUi();
+  }
+  function closeTab(id){
+    const index=browserTabs.findIndex(t=>t.id===id);if(index<0)return;
+    const tab=browserTabs[index];tab.frame.removeAttribute('src');tab.frame.removeAttribute('srcdoc');tab.frame.remove();
+    browserTabs.splice(index,1);
+    if(currentTabId===id)currentTabId=browserTabs.length?browserTabs[Math.min(index,browserTabs.length-1)].id:null;
+    refreshTabUi();
+  }
+  function addTab({url,label,html}){
+    // Limit resource use: opening a sixth tab closes the oldest.
+    if(browserTabs.length>=5)closeTab(browserTabs[0].id);
+    const frame=document.createElement('iframe');frame.title=label||'Embedded website';frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allowFullscreen=true;
+    frame.hidden=true;
+    frameArea.append(frame);
+    const id=nextTabId++;
+    browserTabs.push({id,url:url||null,label:label||'Website',frame});
+    if(html!=null)frame.srcdoc=html;else frame.src=url;
+    currentTabId=id;refreshTabUi();webViewer.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function loadWebsite(urlString){
+    let url;
+    try{url=new URL(urlString);if(!['http:','https:'].includes(url.protocol)||!url.hostname||url.username||url.password)throw Error('Invalid address')}catch{
+      webStatus.textContent='Enter a valid HTTP or HTTPS address.';return;
+    }
+    const name=url.hostname+(url.pathname==='/'?'':url.pathname.substring(0,16));
+    addTab({url:url.href,label:name});
+  }
+  $('#addressForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const url=parseWebsite($('#address').value);
+    if(url)loadWebsite(url.href);
+    else webStatus.textContent='Please enter a valid website address or search query.';
+  });
+  $('#testViewer').addEventListener('click',()=>{
+    const html=`<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{margin:0;background:#f2f6ff;color:#182c4d;font:16px/1.6 system-ui,sans-serif}header{padding:22px;background:#dce7ff}main{max-width:550px;margin:48px auto;padding:28px;background:white;border:1px solid #c9d6eb;border-radius:18px;box-shadow:0 12px 36px #1a37691a}h1{margin:0 0 8px}button{border:0;border-radius:9px;background:#336cda;color:white;font:inherit;font-weight:800;padding:10px 16px;cursor:pointer}</style></head><body><header>📘 Study Games · Demo website</header><main><h1>✅ Internal tab is working</h1><p>This learning page is displayed inside Study Games, without opening a separate browser tab.</p><p>Sites that prohibit iframe embedding will still appear blank or show an error.</p><button id="count" onclick="this.textContent='Clicks: '+(++window.count|| (window.count=1))">Click to test</button></main></body></html>`;
+    addTab({label:'Study Demo',html});
+  });
+  $('#closeWeb').addEventListener('click',()=>{if(currentTabId!==null)closeTab(currentTabId)});
+  document.querySelectorAll('nav.links a').forEach(link=>link.addEventListener('click',e=>{
+    e.preventDefault();loadWebsite(link.href);
+  }));
+  function openGame(name){dispose();gameContent.replaceChildren();if(name==='snake')snake();else if(name==='ttt')ttt();else if(name==='memory')memory();else reaction();dialog.showModal()}
+  function closeGame(){dispose();dispose=()=>{};dialog.close();gameContent.replaceChildren()}
+  $('#closeDialog').addEventListener('click',closeGame);dialog.addEventListener('cancel',e=>{e.preventDefault();closeGame()});
+  document.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>openGame(b.dataset.game)));
+  const savedLinks=$('#savedLinks'),saveMessage=$('#saveMessage');
+  const storageKey='night-arcade-game-links-v1';
+  function getLinks(){try{const items=JSON.parse(localStorage.getItem(storageKey)||'[]');return Array.isArray(items)?items.filter(item=>typeof item?.name==='string'&&typeof item?.url==='string').slice(0,30):[]}catch{return []}}
+  let links=getLinks();
+  function drawLinks(){savedLinks.replaceChildren();if(!links.length){const p=document.createElement('p');p.className='saved-empty';p.textContent='Your saved study and game links will show up here.';savedLinks.append(p);return}
+   links.forEach((item,index)=>{const outer=document.createElement('div');outer.className='saved-item';const a=document.createElement('a');a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';a.addEventListener('click',e=>{e.preventDefault();loadWebsite(item.url)});a.textContent=item.name;a.title=item.url;const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Remove '+item.name);del.addEventListener('click',()=>{links.splice(index,1);storeLinks();drawLinks()});outer.append(a,del);savedLinks.append(outer)})}
+  function storeLinks(){try{localStorage.setItem(storageKey,JSON.stringify(links))}catch{saveMessage.textContent='Links work for this session, but this browser does not allow saving.'}}
+  $('#saveForm').addEventListener('submit',e=>{e.preventDefault();const name=$('#gameName').value.trim(),raw=$('#gameUrl').value.trim();if(!name||!raw)return;let url;try{url=new URL(/^https?:\/\//i.test(raw)?raw:'https://'+raw);if(!['http:','https:'].includes(url.protocol)||!url.hostname.includes('.'))throw Error('Invalid domain')}catch{saveMessage.textContent='Enter a valid website link, such as https://example.com/game';return}if(links.length>=30){saveMessage.textContent='You can save up to 30 links.';return}links.push({name,url:url.href});storeLinks();drawLinks();$('#saveForm').reset();saveMessage.textContent='Link saved! Select it to open an internal Study Games tab.'});
+  drawLinks();
+  function reaction(){
+   $('#gameTitle').textContent='⚡ Reaction Rush';gameContent.innerHTML='<p class="subtle">Tap Start, wait until the box turns green, and then tap it as fast as you can.</p><div class="arena"><button id="reactionPad" class="reaction-pad" type="button">Press Start below</button></div><p class="message" id="reactionMessage" role="status">Best time: —</p><div class="game-actions"><button id="reactionStart" type="button">Start / Retry</button></div>';
+   const pad=$('#reactionPad'),message=$('#reactionMessage');let state='idle',timer=null,readyAt=0,best=null;
+   function start(){clearTimeout(timer);state='waiting';pad.className='reaction-pad';pad.textContent='Wait for green…';message.textContent=best===null?'Get ready!':'Best time: '+best+' ms';timer=setTimeout(()=>{state='ready';readyAt=performance.now();pad.className='reaction-pad ready';pad.textContent='TAP NOW!'},1000+Math.random()*2500)}
+   pad.addEventListener('click',()=>{if(state==='waiting'){clearTimeout(timer);state='early';pad.className='reaction-pad early';pad.textContent='Too early!';message.textContent='Tap Start to try again.'}else if(state==='ready'){const ms=Math.round(performance.now()-readyAt);best=best===null?ms:Math.min(ms,best);state='done';pad.className='reaction-pad';pad.textContent=ms+' ms';message.textContent='Best time: '+best+' ms';}else if(state==='idle'||state==='early'||state==='done'){start()}});
+   $('#reactionStart').addEventListener('click',start);dispose=()=>clearTimeout(timer);
+  }
+  function snake(){
+   $('#gameTitle').textContent='🐍 Neon Snake';gameContent.innerHTML='<div class="stats"><span id="snakeScore">Score: 0</span><span id="snakeStatus">Press Start</span></div><div class="arena"><canvas class="snake-board" id="snakeCanvas" width="400" height="400" aria-label="Snake game playing field"></canvas></div><div class="controls" aria-label="Snake directions"><button type="button" class="ctrl-up" data-dir="up" aria-label="Up">↑</button><button type="button" class="ctrl-left" data-dir="left" aria-label="Left">←</button><button type="button" class="ctrl-down" data-dir="down" aria-label="Down">↓</button><button type="button" class="ctrl-right" data-dir="right" aria-label="Right">→</button></div><div class="game-actions"><button id="snakeStart" type="button">Start / Restart</button></div><p class="subtle">Use arrow keys, WASD, or the on-screen buttons.</p>';
+   const canvas=$('#snakeCanvas'),ctx=canvas.getContext('2d');const N=20,C=20;let body,dir,next,food,score,timer=null,active=false;
+   const dirs={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+   function placeFood(){let free=[];for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(!body.some(p=>p.x===x&&p.y===y))free.push({x,y});return free.length?free[Math.floor(Math.random()*free.length)]:null}
+   function draw(){ctx.fillStyle='#080e17';ctx.fillRect(0,0,400,400);ctx.strokeStyle='#162034';for(let i=0;i<=N;i++){ctx.beginPath();ctx.moveTo(i*C,0);ctx.lineTo(i*C,400);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*C);ctx.lineTo(400,i*C);ctx.stroke()}
+    if(food){ctx.fillStyle='#ff8c9e';ctx.beginPath();ctx.arc(food.x*C+10,food.y*C+10,7,0,Math.PI*2);ctx.fill()}
+    body.forEach((p,i)=>{ctx.fillStyle=i===0?'#a6fbd1':'#42c795';ctx.fillRect(p.x*C+2,p.y*C+2,C-4,C-4)})}
+   function end(message){active=false;clearInterval(timer);timer=null;$('#snakeStatus').textContent=message}
+   function tick(){dir=next;const head={x:body[0].x+dir[0],y:body[0].y+dir[1]};const eat=food&&head.x===food.x&&head.y===food.y;
+    const hits=body.slice(0,eat?body.length:body.length-1).some(p=>p.x===head.x&&p.y===head.y);
+    if(head.x<0||head.x>=N||head.y<0||head.y>=N||hits){end('Game over');return}body.unshift(head);
+    if(eat){score++;$('#snakeScore').textContent='Score: '+score;food=placeFood();if(!food){end('You win!')}}else body.pop();draw()}
+   function start(){clearInterval(timer);body=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];dir=[1,0];next=[1,0];score=0;food=placeFood();active=true;$('#snakeScore').textContent='Score: 0';$('#snakeStatus').textContent='Playing';draw();timer=setInterval(tick,125)}
+   function setDirection(name){const d=dirs[name];if(!active||!d||d[0]===-dir[0]&&d[1]===-dir[1])return;next=d}
+   function key(e){if(dialog.open&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d','W','A','S','D'].includes(e.key)){e.preventDefault();const map={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',a:'left',s:'down',d:'right'};setDirection(map[e.key]||map[e.key.toLowerCase()])}}
+   document.addEventListener('keydown',key);document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setDirection(b.dataset.dir)));$('#snakeStart').addEventListener('click',start);
+   body=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];food={x:14,y:10};draw();dispose=()=>{clearInterval(timer);document.removeEventListener('keydown',key)};
+  }
+  function ttt(){
+   $('#gameTitle').textContent='⭕ Tic-Tac-Toe';gameContent.innerHTML='<p class="subtle">Two players • Pass the device back and forth</p><p id="tttMessage" class="message" role="status">X goes first</p><div class="arena"><div id="tttBoard" class="ttt" role="group" aria-label="Tic-Tac-Toe board"></div></div><div class="game-actions"><button type="button" id="tttReset">New round</button></div>';
+   const board=$('#tttBoard'),msg=$('#tttMessage');let cells,turn,done;const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+   function reset(){cells=Array(9).fill('');turn='X';done=false;msg.textContent='X goes first';board.replaceChildren();cells.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Square '+(i+1));b.addEventListener('click',()=>play(i));board.appendChild(b)})}
+   function play(i){if(done||cells[i])return;cells[i]=turn;board.children[i].textContent=turn;board.children[i].setAttribute('aria-label','Square '+(i+1)+' '+turn);
+    if(lines.some(line=>line.every(j=>cells[j]===turn))){msg.textContent=turn+' wins!';done=true}else if(cells.every(Boolean)){msg.textContent="It's a draw!";done=true}else{turn=turn==='X'?'O':'X';msg.textContent=turn+'\'s turn'}}
+   $('#tttReset').addEventListener('click',reset);reset();dispose=()=>{};
+  }
+  function memory(){
+   $('#gameTitle').textContent='🃏 Memory Flip';gameContent.innerHTML='<p class="subtle">Find all 8 matching pairs.</p><div class="stats"><span id="moves">Moves: 0</span><span id="pairs">Pairs: 0 / 8</span></div><div class="arena"><div class="memory" id="memoryBoard"></div></div><p class="message" role="status" id="memoryStatus"></p><div class="game-actions"><button id="memoryReset" type="button">Shuffle again</button></div>';
+   const faces=['🌙','⭐','🚀','🎧','🎮','🎲','👾','⚡'];let values,flipped,matched,moves,locked,pending=null;
+   const board=$('#memoryBoard');function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+   function show(){[...board.children].forEach((b,i)=>{const face=flipped.includes(i)||matched.has(i);b.textContent=face?values[i]:'?';b.setAttribute('aria-label',face?'Card '+(i+1)+' '+values[i]:'Hidden card '+(i+1));b.disabled=matched.has(i)})}
+   function flip(i){if(locked||flipped.includes(i)||matched.has(i))return;flipped.push(i);show();if(flipped.length!==2)return;
+    moves++;$('#moves').textContent='Moves: '+moves;const [a,b]=flipped;
+    if(values[a]===values[b]){matched.add(a);matched.add(b);flipped=[];$('#pairs').textContent='Pairs: '+(matched.size/2)+' / 8';if(matched.size===16)$('#memoryStatus').textContent='You found them all! 🎉'}else{locked=true;pending=setTimeout(()=>{flipped=[];locked=false;pending=null;show()},850)}}
+   function reset(){if(pending)clearTimeout(pending);pending=null;values=shuffle([...faces,...faces]);flipped=[];matched=new Set();moves=0;locked=false;$('#moves').textContent='Moves: 0';$('#pairs').textContent='Pairs: 0 / 8';$('#memoryStatus').textContent='';board.replaceChildren();values.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.addEventListener('click',()=>flip(i));board.appendChild(b)});show()}
+   $('#memoryReset').addEventListener('click',reset);reset();dispose=()=>{if(pending)clearTimeout(pending)};
+  }
+ })();
+ </script>
+
+
+  <script>
+  /* Self-contained educational practice; answers are shown only after a choice. */
+  (()=>{
+   'use strict';
+   const content = {"math":[["What is 3/4 of 28?",["7","14","21","24"],2,"One fourth of 28 is 7, and three fourths is 3 × 7 = 21."],["Solve for x: 5x − 8 = 27.",["5","7","8","9"],1,"Add 8 to both sides to get 5x = 35; divide by 5 to get x = 7."],["A $50 item is discounted 20%. What is the sale price?",["$10","$30","$40","$45"],2,"20% of $50 is $10; $50 − $10 = $40."],["What is the area of a rectangle 8 cm long and 6 cm wide?",["14 cm²","28 cm²","48 cm²","56 cm²"],2,"Area = length × width = 8 × 6 = 48 cm²."],["Which number is prime?",["21","29","33","39"],1,"29 has no positive factors other than 1 and 29."],["What is 0.6 written as a simplified fraction?",["3/5","2/3","1/6","6/100"],0,"0.6 = 6/10; divide both parts by 2 to get 3/5."],["What is the mean of 4, 6, 8, and 10?",["6","7","8","9"],1,"Add to get 28, then divide by 4 numbers: 28 ÷ 4 = 7."]],"science":[["Which organelle is responsible for most ATP production in animal cells?",["Nucleus","Mitochondrion","Ribosome","Golgi apparatus"],1,"Mitochondria make most of the ATP used by animal cells."],["What force keeps Earth in orbit around the Sun?",["Magnetism","Friction","Gravity","Buoyancy"],2,"Gravity pulls Earth toward the Sun and keeps its path curved."],["In which state of matter are particles generally farthest apart?",["Solid","Liquid","Gas","All are equal"],2,"Gas particles are generally much farther apart than those in solids and liquids."],["What do plants primarily absorb from the air for photosynthesis?",["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],1,"Plants take in carbon dioxide and use light energy to make sugars."],["What is the chemical symbol for sodium?",["S","So","Na","N"],2,"Sodium uses the chemical symbol Na, from the Latin name natrium."],["Which is an example of a chemical change?",["Ice melting","Paper tearing","Iron rusting","Water freezing"],2,"Rusting produces new substances, including iron oxides."],["About how long does Earth take to revolve once around the Sun?",["One day","One week","One month","One year"],3,"Earth completes one revolution in about 365.25 days."]],"social":[["Which document begins with the words “We the People”?",["U.S. Constitution","Declaration of Independence","Bill of Rights (as a separate document)","Articles of Confederation"],0,"The preamble of the U.S. Constitution begins “We the People.”"],["What is the main job of the legislative branch in the U.S. federal government?",["Enforce laws","Interpret laws","Make laws","Command the military"],2,"Congress is the federal legislative branch and is responsible for making laws."],["Which ancient civilization built the pyramids at Giza?",["Roman","Egyptian","Maya","Greek"],1,"The pyramids at Giza were built in ancient Egypt."],["Which event began in 1775?",["American Revolutionary War","U.S. Civil War","World War I","Great Depression"],0,"The American Revolutionary War began in 1775."],["What does a primary source provide?",["A later summary","An original record or firsthand account","A fictional retelling","An encyclopedia overview"],1,"Primary sources are original evidence created by people close to the event or time being studied."],["How many U.S. senators does each state have?",["1","2","3","4"],1,"Each state is represented by two U.S. senators."],["Which ocean was central to trade routes between Europe, West Africa, and the Americas?",["Arctic Ocean","Indian Ocean","Pacific Ocean","Atlantic Ocean"],3,"Transatlantic routes crossed the Atlantic Ocean."]],"ela":[["Which word is an adverb in: “The runner moved quickly”?",["The","runner","moved","quickly"],3,"Quickly describes how the runner moved, so it is an adverb."],["Which sentence uses the correct form of “their,” “there,” or “they’re”?",["Their going to the library.","There books are here.","They're ready to begin.","They're backpacks are blue."],2,"They're is short for 'they are,' so 'They're ready to begin' is correct."],["What is the main idea of a paragraph?",["Its central point","Its longest sentence","Its first adjective","Its final punctuation mark"],0,"The main idea is the central point the paragraph communicates."],["Which word is a synonym for “cautious”?",["Reckless","Careful","Uncertain","Rapid"],1,"Cautious means careful about possible dangers or mistakes."],["Which sentence contains a metaphor?",["The wind sounded like a whistle.","The classroom was a zoo.","She ran very quickly.","The bell rang at noon."],1,"A metaphor describes one thing as another without using like or as."],["Choose the correctly punctuated sentence.",["After lunch we studied science.","After lunch, we studied science.","After, lunch we studied science.","After lunch we, studied science."],1,"An introductory phrase such as “After lunch” is commonly followed by a comma."],["What does “infer” mean when reading?",["Copy a sentence exactly","Guess with no evidence","Draw a conclusion using clues","Read aloud with expression"],2,"An inference uses clues from the text together with what you know."]],"more":[["Which continent contains Brazil?",["North America","South America","Africa","Europe"],1,"Brazil is in South America."],["Which line of latitude is at 0 degrees?",["Prime Meridian","Tropic of Cancer","Equator","Arctic Circle"],2,"The Equator is the reference line for 0° latitude."],["Which direction is opposite northeast?",["Northwest","Southwest","Southeast","South"],1,"Southwest is directly opposite northeast on a compass."],["In computer science, what is a loop used for?",["Repeat instructions","Store a picture","Turn off a device","Rename a file"],0,"A loop executes a block of instructions multiple times."],["Which file extension is typically used for a web page?",[".mp3",".html",".jpg",".zip"],1,"HTML files define the structure and content of web pages."],["Which continent is also a country?",["Africa","Europe","Australia","Antarctica"],2,"Australia is both a country and, in a common seven-continent model, a continent."],["On a map, what does a scale help you measure?",["Distance","Population","Temperature","Elevation only"],0,"A map scale relates distances on the map to distances in the real world."]]};
+   const names={math:'Math',science:'Science',social:'Social Studies',ela:'English Language Arts (ELA)',more:'Geography & More'};
+   const dlg=document.querySelector('#studyPanel');
+   const area=document.querySelector('#studyArea');
+   const initial=area.innerHTML;
+   let subject=null, step=0, score=0, answered=false;
+   let questions=[];
+   function byId(id){return document.getElementById(id)}
+   function render(){
+     if(step>=questions.length){
+       area.replaceChildren();
+       const summary=document.createElement('div');summary.className='quiz-summary';
+       const heading=document.createElement('h3');heading.textContent='Challenge complete! 🎉';
+       const p=document.createElement('p');p.textContent=`You got ${score} out of ${questions.length} correct in ${names[subject]}.`;
+       const retry=document.createElement('button');retry.className='quiz-next';retry.type='button';retry.textContent='Try again ↻';retry.addEventListener('click',()=>start(subject));
+       summary.append(heading,p,retry);area.append(summary);return;
+     }
+     answered=false;
+     byId('quizStep').textContent=`Question ${step+1} of ${questions.length}`;
+     byId('quizScore').textContent=`Score: ${score}`;
+     byId('quizProgress').style.width=`${step/questions.length*100}%`;
+     const q=questions[step];byId('quizQuestion').textContent=q[0];byId('quizFeedback').textContent='Select an answer to see an explanation.';
+     const options=byId('quizChoices');options.replaceChildren();
+     q[1].forEach((label,i)=>{
+       const btn=document.createElement('button');btn.type='button';btn.textContent=String.fromCharCode(65+i)+'. '+label;
+       btn.addEventListener('click',()=>choose(i));options.append(btn);
+     });
+     const next=byId('quizNext');next.disabled=true;next.textContent=step===questions.length-1?'See results →':'Next question →';
+   }
+   function choose(i){
+     if(answered)return;answered=true;
+     const q=questions[step];const correct=q[2];if(i===correct)score++;
+     [...byId('quizChoices').children].forEach((btn,j)=>{btn.disabled=true;if(j===correct)btn.classList.add('correct');else if(j===i)btn.classList.add('incorrect')});
+     byId('quizFeedback').textContent=(i===correct?'Correct! ':'Not quite. ')+q[3];
+     byId('quizScore').textContent=`Score: ${score}`;
+     byId('quizProgress').style.width=`${(step+1)/questions.length*100}%`;
+     byId('quizNext').disabled=false;
+   }
+   function next(){if(!answered)return;step++;render()}
+   function start(code){
+     subject=code;step=0;score=0;questions=[...content[code]];
+     for(let i=questions.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[questions[i],questions[j]]=[questions[j],questions[i]]}
+     byId('studyTitle').textContent=names[code]+' Challenge';
+     area.innerHTML=initial;
+     byId('quizNext').addEventListener('click',next);
+     render();
+     dlg.hidden=false;dlg.scrollIntoView({behavior:'smooth',block:'start'});
+   }
+   document.querySelectorAll('[data-subject]').forEach(button=>button.addEventListener('click',()=>start(button.dataset.subject)));
+   byId('closeStudy').addEventListener('click',()=>{dlg.hidden=true;document.querySelector('#subjects').scrollIntoView({behavior:'smooth',block:'start'});});
+  })();
+  </script>
+
+ <script>
+ /* Educational lab is fully embedded, works offline, and is isolated from the arcade. */
+ (()=>{
+  const dialog=document.querySelector('#labDialog');
+  const iframe=document.querySelector('#labFrame');
+  const embeddedLab='PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ii8+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsaW5pdGlhbC1zY2FsZT0xIi8+Cjx0aXRsZT5TY3JlZW4gQ2FwdHVyZSBMYWIg4oCUIFNpbXVsYXRpb248L3RpdGxlPgo8c3R5bGU+Cjpyb290e2NvbG9yLXNjaGVtZTpkYXJrOy0tYmc6IzA5MGIxMTstLXBhbmVsOiMxNDE4MjQ7LS1saW5lOiMyOTMxNDY7LS10eHQ6I2VkZjNmZjstLW11dGVkOiNhMGFlYzU7LS1jeWFuOiM1MWU1ZGQ7LS1hbWJlcjojZmZkMDc4Oy0tdmlvbGV0OiM5YzhkZmZ9Kntib3gtc2l6aW5nOmJvcmRlci1ib3h9Ym9keXttYXJnaW46MDtiYWNrZ3JvdW5kOnJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgMjAlIDEwJSwjMTcyMTNkLCMwOTBiMTEgNTUlKTtjb2xvcjp2YXIoLS10eHQpO2ZvbnQtZmFtaWx5OkludGVyLHN5c3RlbS11aSwtYXBwbGUtc3lzdGVtLFNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWY7bWluLWhlaWdodDoxMDB2aH0ud3JhcHttYXgtd2lkdGg6MTEzMHB4O21hcmdpbjphdXRvO3BhZGRpbmc6MjVweCAxN3B4IDUwcHh9LnRvcHtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO2dhcDoxNnB4O2ZsZXgtd3JhcDp3cmFwfS5sb2dve2ZvbnQtc2l6ZToxM3B4O2xldHRlci1zcGFjaW5nOjJweDtjb2xvcjp2YXIoLS1jeWFuKTtmb250LXdlaWdodDo4MDA7dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlfS5oZWFkaW5ne2ZvbnQtc2l6ZTpjbGFtcCgyOHB4LDV2dyw0M3B4KTtsZXR0ZXItc3BhY2luZzotMS40cHg7bGluZS1oZWlnaHQ6MS4xO21hcmdpbjoxMXB4IDB9LnN1YnRpdGxle2NvbG9yOnZhcigtLW11dGVkKTttYXgtd2lkdGg6NzQwcHg7bGluZS1oZWlnaHQ6MS42NTttYXJnaW46MCAwIDIzcHh9LnBpbGx7Ym9yZGVyOjFweCBzb2xpZCAjNGU0OTc2O2JhY2tncm91bmQ6IzJiMjU0Mjtjb2xvcjojZGNjZGZmO2JvcmRlci1yYWRpdXM6MzBweDtwYWRkaW5nOjhweCAxMnB4O2ZvbnQtc2l6ZToxMnB4O2ZvbnQtd2VpZ2h0OjgwMDtsZXR0ZXItc3BhY2luZzouM3B4fS5jb250cm9sc3tkaXNwbGF5OmZsZXg7Z2FwOjhweDtmbGV4LXdyYXA6d3JhcDttYXJnaW46MCAwIDE4cHh9LmNvbnRyb2xzIGJ1dHRvbntjdXJzb3I6cG9pbnRlcjtjb2xvcjp2YXIoLS10eHQpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tbGluZSk7YmFja2dyb3VuZDojMWIyMDMwO2JvcmRlci1yYWRpdXM6MTBweDtwYWRkaW5nOjEycHggMTRweDtmb250LXNpemU6MTRweDtmb250LXdlaWdodDo3MDA7dHJhbnNpdGlvbjpiYWNrZ3JvdW5kIC4xOHMsYm9yZGVyLWNvbG9yIC4xOHN9LmNvbnRyb2xzIGJ1dHRvbjpob3ZlcntiYWNrZ3JvdW5kOiMyNjJkNDN9LmNvbnRyb2xzIGJ1dHRvblthcmlhLXByZXNzZWQ9InRydWUiXXtib3JkZXItY29sb3I6dmFyKC0tY3lhbik7YmFja2dyb3VuZDojMTQzYzQ0O2NvbG9yOiNiZGZmZmF9LnBhbmVze2Rpc3BsYXk6Z3JpZDtncmlkLXRlbXBsYXRlLWNvbHVtbnM6MWZyIDFmcjtnYXA6MTZweH0ucGFuZWx7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1saW5lKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsKTtib3JkZXItcmFkaXVzOjE2cHg7cGFkZGluZzoxNXB4O2JveC1zaGFkb3c6MCAxNnB4IDM1cHggIzAwMDV9LnBhbmVsLWhlYWR7ZGlzcGxheTpmbGV4O2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO2FsaWduLWl0ZW1zOmNlbnRlcjtnYXA6MTJweDttYXJnaW4tYm90dG9tOjEzcHh9LnBhbmVsLXRpdGxle2ZvbnQtc2l6ZToxNXB4O2ZvbnQtd2VpZ2h0OjgwMH0ucGFuZWwtc3Vie2ZvbnQtc2l6ZToxMnB4O2NvbG9yOnZhcigtLW11dGVkKX0uZG90e3dpZHRoOjdweDtoZWlnaHQ6N3B4O2JvcmRlci1yYWRpdXM6NTAlO2JhY2tncm91bmQ6dmFyKC0tY3lhbik7ZGlzcGxheTppbmxpbmUtYmxvY2s7Ym94LXNoYWRvdzowIDAgOHB4IHZhcigtLWN5YW4pO21hcmdpbi1yaWdodDo2cHh9LmRvdC5hbWJlcntiYWNrZ3JvdW5kOnZhcigtLWFtYmVyKTtib3gtc2hhZG93OjAgMCA4cHggdmFyKC0tYW1iZXIpfWNhbnZhc3t3aWR0aDoxMDAlO2hlaWdodDphdXRvO2FzcGVjdC1yYXRpbzoxNi8xMDtib3JkZXI6MXB4IHNvbGlkICMzMjNiNTI7Ym9yZGVyLXJhZGl1czoxMXB4O2JhY2tncm91bmQ6IzA2MDgwZjtkaXNwbGF5OmJsb2NrO3RvdWNoLWFjdGlvbjptYW5pcHVsYXRpb259LnNtYWxse2ZvbnQtc2l6ZToxMnB4O2NvbG9yOnZhcigtLW11dGVkKTtsaW5lLWhlaWdodDoxLjZ9LnN0YXR7bWFyZ2luLXRvcDoxM3B4O2Rpc3BsYXk6ZmxleDtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2VlbjtnYXA6MTBweDthbGlnbi1pdGVtczpjZW50ZXJ9LnN0YXQgc3Ryb25ne2ZvbnQtc2l6ZToxNXB4O2NvbG9yOnZhcigtLWN5YW4pfS5kZXRhaWxze21hcmdpbi10b3A6MThweDtkaXNwbGF5OmdyaWQ7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjEuMTVmciAxZnI7Z2FwOjE2cHh9LmluZm97YmFja2dyb3VuZDojMTMxODI3O2JvcmRlcjoxcHggc29saWQgdmFyKC0tbGluZSk7Ym9yZGVyLXJhZGl1czoxNXB4O3BhZGRpbmc6MThweH0uaW5mbyBoMntmb250LXNpemU6MThweDttYXJnaW46MCAwIDlweH0uaW5mbyBwe2xpbmUtaGVpZ2h0OjEuNjU7bWFyZ2luOjA7Y29sb3I6I2I4YzRkOX0uaW5mbyBwK3B7bWFyZ2luLXRvcDoxMXB4fS5tdXRlZC1ub3Rle21hcmdpbi10b3A6MThweDtmb250LXNpemU6MTNweDtjb2xvcjojYjNiYWQwO2JvcmRlci1sZWZ0OjNweCBzb2xpZCB2YXIoLS12aW9sZXQpO3BhZGRpbmc6OHB4IDEycHg7YmFja2dyb3VuZDojMTkxOTJiO2JvcmRlci1yYWRpdXM6MCA4cHggOHB4IDB9LmZvb3Rlcntmb250LXNpemU6MTJweDtjb2xvcjojNzc4MjliO21hcmdpbi10b3A6MjBweH0uYnRuMntmb250LXNpemU6MTJweDtib3JkZXI6MXB4IHNvbGlkICM0YTU1NzA7Ym9yZGVyLXJhZGl1czo4cHg7YmFja2dyb3VuZDojMjIyYjQwO2NvbG9yOiNlNmY1ZmY7cGFkZGluZzo4cHggMTBweDtjdXJzb3I6cG9pbnRlcn0uYnRuMjpob3ZlcntiYWNrZ3JvdW5kOiMzMDNkNWF9QG1lZGlhKG1heC13aWR0aDo3MzBweCl7LnBhbmVzLC5kZXRhaWxze2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LndyYXB7cGFkZGluZy10b3A6MjBweH19Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxtYWluIGNsYXNzPSJ3cmFwIj4KIDxoZWFkZXIgY2xhc3M9InRvcCI+PGRpdiBjbGFzcz0ibG9nbyI+4peJIFNjcmVlbiBDYXB0dXJlIExhYjwvZGl2PjxkaXYgY2xhc3M9InBpbGwiPkRFTU9OU1RSQVRJT04gT05MWTwvZGl2PjwvaGVhZGVyPgogPGgxIGNsYXNzPSJoZWFkaW5nIj5XaGF0IGhhcHBlbnMgd2hlbiBhPGJyPnNjcmVlbiBwcmV2aWV3IGZhaWxzPzwvaDE+CiA8cCBjbGFzcz0ic3VidGl0bGUiPlRyeSBmb3VyIHNpbXVsYXRlZCBjYXB0dXJlIGNvbmRpdGlvbnMuIFRoZSBsZWZ0IHNpZGUgaXMgYW4gYW5pbWF0ZWQsIGludGVyYWN0aXZlIHNjZW5lLiBUaGUgcmlnaHQgc2lkZSByZXByZXNlbnRzIHdoYXQgYSBtb25pdG9yaW5nIHByZXZpZXcgPGVtPm1pZ2h0PC9lbT4gZGlzcGxheSBpZiBhIGNhcHR1cmUgb3IgdHJhbnNtaXNzaW9uIHN0ZXAgZmFpbHMuPC9wPgogPG5hdiBjbGFzcz0iY29udHJvbHMiIGFyaWEtbGFiZWw9IlNpbXVsYXRlZCBjYXB0dXJlIG1vZGUiPgogIDxidXR0b24gZGF0YS1tb2RlPSJub3JtYWwiIGFyaWEtcHJlc3NlZD0idHJ1ZSI+4pyTIE5vcm1hbCBjYXB0dXJlPC9idXR0b24+CiAgPGJ1dHRvbiBkYXRhLW1vZGU9ImJsYWNrIiBhcmlhLXByZXNzZWQ9ImZhbHNlIj7il7wgQmxhY2sgcHJldmlldzwvYnV0dG9uPgogIDxidXR0b24gZGF0YS1tb2RlPSJmcm96ZW4iIGFyaWEtcHJlc3NlZD0iZmFsc2UiPuKdhCBGcm96ZW4gcHJldmlldzwvYnV0dG9uPgogIDxidXR0b24gZGF0YS1tb2RlPSJkZWxheWVkIiBhcmlhLXByZXNzZWQ9ImZhbHNlIj7il7cgRGVsYXllZCBwcmV2aWV3PC9idXR0b24+CiA8L25hdj4KIDxzZWN0aW9uIGNsYXNzPSJwYW5lcyI+CiAgPGRpdiBjbGFzcz0icGFuZWwiPjxkaXYgY2xhc3M9InBhbmVsLWhlYWQiPjxkaXY+PGRpdiBjbGFzcz0icGFuZWwtdGl0bGUiPllvdXIgYWN0aXZlIHNjZW5lPC9kaXY+PGRpdiBjbGFzcz0icGFuZWwtc3ViIj5UaGlzIGFuaW1hdGlvbiBjb250aW51ZXMgaW4gZXZlcnkgbW9kZTwvZGl2PjwvZGl2PjxzcGFuIGNsYXNzPSJwYW5lbC1zdWIiPjxzcGFuIGNsYXNzPSJkb3QiPjwvc3Bhbj4gTElWRTwvc3Bhbj48L2Rpdj4KICAgPGNhbnZhcyBpZD0iYWN0aXZlIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjQwMCIgYXJpYS1sYWJlbD0iQW5pbWF0ZWQgaW50ZXJhY3RpdmUgc2NlbmUgd2l0aCBjb2xsZWN0aWJsZSBzdGFycyI+PC9jYW52YXM+CiAgIDxkaXYgY2xhc3M9InN0YXQiPjxkaXYgY2xhc3M9InNtYWxsIj5UYXAgb3IgY2xpY2sgdGhlIHN0YXJzIHRvIGNvbGxlY3QgdGhlbTwvZGl2PjxzdHJvbmcgaWQ9InNjb3JlIj7imIUgMDwvc3Ryb25nPjwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InBhbmVsIj48ZGl2IGNsYXNzPSJwYW5lbC1oZWFkIj48ZGl2PjxkaXYgY2xhc3M9InBhbmVsLXRpdGxlIj5TaW11bGF0ZWQgdmlld2VyIHByZXZpZXc8L2Rpdj48ZGl2IGNsYXNzPSJwYW5lbC1zdWIiIGlkPSJzdWIiPlJlY2VpdmluZyBzbmFwc2hvdHMgbm9ybWFsbHk8L2Rpdj48L2Rpdj48c3BhbiBjbGFzcz0icGFuZWwtc3ViIj48c3BhbiBjbGFzcz0iZG90IGFtYmVyIj48L3NwYW4+IFBSRVZJRVc8L3NwYW4+PC9kaXY+CiAgIDxjYW52YXMgaWQ9InByZXZpZXciIHdpZHRoPSI2NDAiIGhlaWdodD0iNDAwIiBhcmlhLWxhYmVsPSJTaW11bGF0ZWQgc2NyZWVuc2hvdCBwcmV2aWV3Ij48L2NhbnZhcz4KICAgPGRpdiBjbGFzcz0ic3RhdCI+PHNwYW4gY2xhc3M9InNtYWxsIiBpZD0ic3RhdHVzIj5GcmVzaCBzbmFwc2hvdCByZWNlaXZlZDwvc3Bhbj48YnV0dG9uIGNsYXNzPSJidG4yIiBpZD0icmVzZXQiPlJlc2V0IHByZXZpZXc8L2J1dHRvbj48L2Rpdj4KICA8L2Rpdj4KIDwvc2VjdGlvbj4KIDxzZWN0aW9uIGNsYXNzPSJkZXRhaWxzIj4KICA8YXJ0aWNsZSBjbGFzcz0iaW5mbyI+PGgyIGlkPSJleHBsYWluLXRpdGxlIj5Ob3JtYWwgY2FwdHVyZTwvaDI+PHAgaWQ9ImV4cGxhaW4iPlRoZSBwcmV2aWV3IHVwZGF0ZXMgd2l0aCBzbmFwc2hvdHMgb2YgdGhlIGFjdGl2ZSBzY2VuZS4gSGVyZSwgdGhlIHNpbXVsYXRpb24gY29waWVzIHBpeGVscyBiZXR3ZWVuIHR3byBjYW52YXNlcyB0byBkZW1vbnN0cmF0ZSB0aGUgaWRlYS48L3A+PC9hcnRpY2xlPgogIDxhcnRpY2xlIGNsYXNzPSJpbmZvIj48aDI+V2hhdCB0aGlzIGRvZXMgPGVtPm5vdDwvZW0+IGRvPC9oMj48cD5UaGlzIHBhZ2UgPHN0cm9uZz5kb2VzIG5vdCBibG9jaywgbW9kaWZ5LCBvciBmb29sIGFjdHVhbCBzY3JlZW4tcmVjb3JkaW5nIG9yIHNjaG9vbC1tb25pdG9yaW5nIHRvb2xzPC9zdHJvbmc+LiBBbGwgZm91ciBvdXRjb21lcyBhcmUgc2ltdWxhdGVkIGluc2lkZSB0aGlzIHBhZ2U7IGEgcmVhbCBzY3JlZW4gcmVjb3JkZXIgY2FuIHN0aWxsIGNhcHR1cmUgdGhlIGVudGlyZSBwYWdlLjwvcD48L2FydGljbGU+CiA8L3NlY3Rpb24+CiA8YXNpZGUgY2xhc3M9Im11dGVkLW5vdGUiPjxzdHJvbmc+S2V5IGRpc3RpbmN0aW9uOjwvc3Ryb25nPiBBIGJsYWNrIHByZXZpZXcgZG9lcyBub3QgcHJvdmUgdGhhdCB3ZWJzaXRlIGhpc3RvcnksIG5ldHdvcmsgbG9ncywgb3Igb3RoZXIgbW9uaXRvcmluZyBoYXMgc3RvcHBlZC48L2FzaWRlPgogPGRpdiBjbGFzcz0iZm9vdGVyIj5CdWlsdCBhcyBhIHNlbGYtY29udGFpbmVkIG9mZmxpbmUgZWR1Y2F0aW9uYWwgZGVtby4gTm8gYWNjb3VudHMsIHRyYWNraW5nLCBzZXJ2ZXJzLCBwcm94eSBzZXJ2aWNlcywgb3IgZXh0ZXJuYWwgZGVwZW5kZW5jaWVzLjwvZGl2Pgo8L21haW4+CjxzY3JpcHQ+CigoKT0+ewogJ3VzZSBzdHJpY3QnOwogY29uc3QgYWN0aXZlPWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNhY3RpdmUnKSxwcmV2aWV3PWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNwcmV2aWV3Jyk7CiBjb25zdCBhPWFjdGl2ZS5nZXRDb250ZXh0KCcyZCcpLHA9cHJldmlldy5nZXRDb250ZXh0KCcyZCcpOwogY29uc3Qgc2NvcmVFbD1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjc2NvcmUnKSxzdGF0dXM9ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3N0YXR1cycpLHN1Yj1kb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjc3ViJyksdGl0bGU9ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI2V4cGxhaW4tdGl0bGUnKSxleHBsYWluPWRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNleHBsYWluJyk7CiBjb25zdCBidXR0b25zPVsuLi5kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdbZGF0YS1tb2RlXScpXTsKIGxldCBtb2RlPSdub3JtYWwnLHNjb3JlPTAsdGljaz0wLGxhc3RDYXB0dXJlPTAsbGFzdERlbGF5ZWQ9MCxmcm96ZW5NYWRlPWZhbHNlLHN0YXI9e3g6MjUwLHk6MTMwLHI6MjN9LHRyYWlsPVtdOwogY29uc3QgaW5mb3M9ewogIG5vcm1hbDpbJ05vcm1hbCBjYXB0dXJlJywnVGhlIHByZXZpZXcgdXBkYXRlcyB3aXRoIHNuYXBzaG90cyBvZiB0aGUgYWN0aXZlIHNjZW5lLiBIZXJlLCB0aGUgc2ltdWxhdGlvbiBjb3BpZXMgcGl4ZWxzIGJldHdlZW4gdHdvIGNhbnZhc2VzIHRvIGRlbW9uc3RyYXRlIHRoZSBpZGVhLicsJ1JlY2VpdmluZyBzbmFwc2hvdHMgbm9ybWFsbHknXSwKICBibGFjazpbJ0JsYWNrIHByZXZpZXcgKHNpbXVsYXRlZCknLCdJbiB0aGlzIG1vZGUsIHRoZSBkZW1vIHJlcGxhY2VzIHRoZSBwcmV2aWV3IHdpdGggYmxhY2sgcGl4ZWxzLiBSZWFsIG1vbml0b3Jpbmcgc29mdHdhcmUgaXMgbm90IGFmZmVjdGVkLiBBIHJlYWwgYmxhY2sgcHJldmlldyBjYW4gaGF2ZSBtYW55IHVucmVsYXRlZCBjYXVzZXMuJywnRGlzcGxheWluZyBhIHNpbXVsYXRlZCBibGFuayBpbWFnZSddLAogIGZyb3plbjpbJ0Zyb3plbiBwcmV2aWV3IChzaW11bGF0ZWQpJywnVGhlIHByZXZpZXcga2VlcHMgaXRzIGxhc3QgY2FwdHVyZWQgaW1hZ2Ugd2hpbGUgdGhlIHNjZW5lIGNvbnRpbnVlcyBtb3ZpbmcuIFRoaXMgaWxsdXN0cmF0ZXMgc3RhbGUgcHJldmlld3MgYW5kIG1pc3NlZCBpbWFnZSB1cGRhdGVzLicsJ05vIG5ldyBpbWFnZSB1cGRhdGVzJ10sCiAgZGVsYXllZDpbJ0RlbGF5ZWQgcHJldmlldyAoc2ltdWxhdGVkKScsJ1RoZSBwcmV2aWV3IHNob3dzIG9sZGVyIHNuYXBzaG90cyBmcm9tIGEgdGhyZWUtc2Vjb25kIGJ1ZmZlciwgZGVtb25zdHJhdGluZyB3aGF0IGxhZyBvciBkZWxheWVkIGRlbGl2ZXJ5IG1pZ2h0IGxvb2sgbGlrZS4nLCdTaG93aW5nIHNuYXBzaG90cyBhYm91dCAzIHNlY29uZHMgbGF0ZSddCiB9OwogZnVuY3Rpb24gbmV3U3Rhcigpe3N0YXI9e3g6MzUrTWF0aC5yYW5kb20oKSo1NzAseTo0NStNYXRoLnJhbmRvbSgpKjMwMCxyOjIzfTt9CiBmdW5jdGlvbiBzZXRNb2RlKG0pe21vZGU9bTtidXR0b25zLmZvckVhY2goYj0+Yi5zZXRBdHRyaWJ1dGUoJ2FyaWEtcHJlc3NlZCcsU3RyaW5nKGIuZGF0YXNldC5tb2RlPT09bW9kZSkpKTtbdGl0bGUudGV4dENvbnRlbnQsZXhwbGFpbi50ZXh0Q29udGVudCxzdWIudGV4dENvbnRlbnRdPWluZm9zW21dO2Zyb3plbk1hZGU9ZmFsc2U7bGFzdENhcHR1cmU9MDtsYXN0RGVsYXllZD0wO2lmKG09PT0nYmxhY2snKWRyYXdCbGFjaygpO2Vsc2UgaWYobT09PSdmcm96ZW4nKXtwLmRyYXdJbWFnZShhY3RpdmUsMCwwKTtmcm96ZW5NYWRlPXRydWU7c3RhdHVzLnRleHRDb250ZW50PSdQcmV2aWV3IGZyb3plbiBhdCBvbmUgZnJhbWUnO31lbHNlIGlmKG09PT0nZGVsYXllZCcpe3N0YXR1cy50ZXh0Q29udGVudD0nQnVpbGRpbmcgYSAzLXNlY29uZCBzbmFwc2hvdCBidWZmZXLigKYnO3AuZHJhd0ltYWdlKGFjdGl2ZSwwLDApO31lbHNlIHN0YXR1cy50ZXh0Q29udGVudD0nRnJlc2ggc25hcHNob3QgcmVjZWl2ZWQnO30KIGZ1bmN0aW9uIGRyYXdCbGFjaygpe3AuZmlsbFN0eWxlPScjMDMwMzAzJztwLmZpbGxSZWN0KDAsMCw2NDAsNDAwKTtwLmZpbGxTdHlsZT0nIzY2NzA4Nic7cC50ZXh0QWxpZ249J2NlbnRlcic7cC5mb250PScxOHB4IHN5c3RlbS11aSc7cC5maWxsVGV4dCgnQkxBQ0sgUFJFVklFVyAoU0lNVUxBVEVEKScsMzIwLDIwMyk7c3RhdHVzLnRleHRDb250ZW50PSdCbGFjayBwcmV2aWV3IGRpc3BsYXllZCBpbiBkZW1vIG9ubHknO30KIGJ1dHRvbnMuZm9yRWFjaChiPT5iLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywoKT0+c2V0TW9kZShiLmRhdGFzZXQubW9kZSkpKTsKIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNyZXNldCcpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywoKT0+e3RyYWlsPVtdO3NldE1vZGUobW9kZSk7fSk7CiBhY3RpdmUuYWRkRXZlbnRMaXN0ZW5lcigncG9pbnRlcmRvd24nLGU9Pntjb25zdCByPWFjdGl2ZS5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKSx4PShlLmNsaWVudFgtci5sZWZ0KSo2NDAvci53aWR0aCx5PShlLmNsaWVudFktci50b3ApKjQwMC9yLmhlaWdodDtpZihNYXRoLmh5cG90KHgtc3Rhci54LHktc3Rhci55KTxzdGFyLnIrMTIpe3Njb3JlKys7c2NvcmVFbC50ZXh0Q29udGVudD0n4piFICcrc2NvcmU7bmV3U3RhcigpO319KTsKIGZ1bmN0aW9uIGRyYXdTY2VuZShtcyl7Y29uc3QgdD1tcy8xMDAwO2EuY2xlYXJSZWN0KDAsMCw2NDAsNDAwKTtjb25zdCBiZz1hLmNyZWF0ZUxpbmVhckdyYWRpZW50KDAsMCw2NDAsNDAwKTtiZy5hZGRDb2xvclN0b3AoMCwnIzEwMTgzYycpO2JnLmFkZENvbG9yU3RvcCgxLCcjMDcyYTM4Jyk7YS5maWxsU3R5bGU9Ymc7YS5maWxsUmVjdCgwLDAsNjQwLDQwMCk7CiBmb3IobGV0IGk9MDtpPDM0O2krKyl7Y29uc3QgeD0oaSoxMjcrTWF0aC5zaW4odCouMzUraSkqMjUpJTY0MCx5PShpKjgzK3QqKDgraSUzKSoyKSU0MDA7YS5maWxsU3R5bGU9YHJnYmEoMTQ4LDE5NiwyNTUsJHsuMTMrKGklNCkqLjA4fSlgO2EuYmVnaW5QYXRoKCk7YS5hcmMoeCx5LDErKGklMyksMCxNYXRoLlBJKjIpO2EuZmlsbCgpO30KIGNvbnN0IGJhbGxYPTMyMCtNYXRoLmNvcyh0KjEuMikqMTc1LGJhbGxZPTIwNCtNYXRoLnNpbih0KjEuNjUpKjEwNTt0cmFpbC5wdXNoKFtiYWxsWCxiYWxsWV0pO2lmKHRyYWlsLmxlbmd0aD4yNCl0cmFpbC5zaGlmdCgpO3RyYWlsLmZvckVhY2goKFt4LHldLGkpPT57YS5iZWdpblBhdGgoKTthLmFyYyh4LHksMytpLzYsMCw3KTthLmZpbGxTdHlsZT1gcmdiYSg4MSwyMjksMjIxLCR7aS90cmFpbC5sZW5ndGgqLjQ1fSlgO2EuZmlsbCgpfSk7CiBhLnNoYWRvd0JsdXI9MzQ7YS5zaGFkb3dDb2xvcj0nIzUxZTVkZCc7YS5maWxsU3R5bGU9JyM1MWU1ZGQnO2EuYmVnaW5QYXRoKCk7YS5hcmMoYmFsbFgsYmFsbFksMjEsMCw3KTthLmZpbGwoKTthLnNoYWRvd0JsdXI9MDsKIGEuc2F2ZSgpO2EudHJhbnNsYXRlKHN0YXIueCxzdGFyLnkpO2Eucm90YXRlKHQqLjcpO2Euc2hhZG93Qmx1cj0xNjthLnNoYWRvd0NvbG9yPScjZmZkMDc4JzthLmJlZ2luUGF0aCgpO2ZvcihsZXQgaj0wO2o8MTA7aisrKXtsZXQgYW49LU1hdGguUEkvMitqKk1hdGguUEkvNSxyYWQ9aiUyPzExOjI1O2EubGluZVRvKE1hdGguY29zKGFuKSpyYWQsTWF0aC5zaW4oYW4pKnJhZCl9YS5jbG9zZVBhdGgoKTthLmZpbGxTdHlsZT0nI2ZmZDA3OCc7YS5maWxsKCk7YS5yZXN0b3JlKCk7YS5zaGFkb3dCbHVyPTA7CiBhLmZvbnQ9JzcwMCAyM3B4IHN5c3RlbS11aSc7YS5maWxsU3R5bGU9JyNlZWY2ZmYnO2EuZmlsbFRleHQoJ0xJVkUgU0NFTkUnLDIxLDM5KTthLmZvbnQ9JzE0cHggc3lzdGVtLXVpJzthLmZpbGxTdHlsZT0nI2E0YjZkMCc7YS5maWxsVGV4dCgnVGhlIGdsb3dpbmcgb3JiIGtlZXBzIG1vdmluZycsMjIsNjUpO2EudGV4dEFsaWduPSdyaWdodCc7YS5maWxsVGV4dCgnVGltZSAnK3QudG9GaXhlZCgxKSsncycsNjE1LDM1KTthLnRleHRBbGlnbj0nbGVmdCc7fQogY29uc3Qgc25hcHNob3RzPVtdOwogZnVuY3Rpb24gZnJhbWUobXMpe2RyYXdTY2VuZShtcyk7aWYobXMtbGFzdENhcHR1cmU+MzUwKXtsYXN0Q2FwdHVyZT1tcztjb25zdCBvZmY9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnY2FudmFzJyk7b2ZmLndpZHRoPTY0MDtvZmYuaGVpZ2h0PTQwMDtvZmYuZ2V0Q29udGV4dCgnMmQnKS5kcmF3SW1hZ2UoYWN0aXZlLDAsMCk7c25hcHNob3RzLnB1c2goe3RpbWU6bXMsY2FudmFzOm9mZn0pO3doaWxlKHNuYXBzaG90cy5sZW5ndGgmJnNuYXBzaG90c1swXS50aW1lPG1zLTYwMDApc25hcHNob3RzLnNoaWZ0KCk7aWYobW9kZT09PSdub3JtYWwnKXtwLmRyYXdJbWFnZShhY3RpdmUsMCwwKTtzdGF0dXMudGV4dENvbnRlbnQ9J0ZyZXNoIHNuYXBzaG90IHJlY2VpdmVkJzt9ZWxzZSBpZihtb2RlPT09J2JsYWNrJyl7ZHJhd0JsYWNrKCk7fWVsc2UgaWYobW9kZT09PSdmcm96ZW4nJiYhZnJvemVuTWFkZSl7cC5kcmF3SW1hZ2UoYWN0aXZlLDAsMCk7ZnJvemVuTWFkZT10cnVlO3N0YXR1cy50ZXh0Q29udGVudD0nUHJldmlldyBmcm96ZW4gYXQgb25lIGZyYW1lJzt9fQogaWYobW9kZT09PSdkZWxheWVkJyYmbXMtbGFzdERlbGF5ZWQ+MzUwKXtsYXN0RGVsYXllZD1tcztjb25zdCBzbmFwPXNuYXBzaG90cy5maW5kKHM9PnMudGltZT49bXMtMzMwMCk7aWYoc25hcCYmc25hcC50aW1lPG1zLTI3MDApe3AuZHJhd0ltYWdlKHNuYXAuY2FudmFzLDAsMCk7c3RhdHVzLnRleHRDb250ZW50PSdEZWxheWVkIHNuYXBzaG90OiBhcHByb3hpbWF0ZWx5IDMgc2Vjb25kcyBvbGQnO319CiByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoZnJhbWUpO30KIHJlcXVlc3RBbmltYXRpb25GcmFtZShmcmFtZSk7Cn0pKCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4K';
+  document.querySelector('#openLab').addEventListener('click',()=>{
+   iframe.srcdoc=new TextDecoder().decode(Uint8Array.from(atob(embeddedLab), c=>c.charCodeAt(0)));
+   dialog.showModal();
+  });
+  function close(){dialog.close();iframe.removeAttribute('srcdoc');}
+  document.querySelector('#closeLab').addEventListener('click',close);
+  dialog.addEventListener('cancel',(event)=>{event.preventDefault();close()});
+ })();
+ </script>
+</body>
+</html>
