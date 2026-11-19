@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07090e">
-  <title>Study Games — Math, Science, Social Studies, ELA & More</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#07090e" name="theme-color"/>
+<title>Study Games | Math, Science, Social Studies, ELA &amp; More</title>
+<style>
     :root{color-scheme:dark;--bg:#080b12;--panel:#101522;--panel2:#151c2b;--border:#273146;--muted:#a0aec6;--accent:#7b9cff;--green:#4de3a0;--red:#ff798b;--text:#f3f6ff}
     *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse 65% 32% at 50% -10%,#24375b 0,transparent 85%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
     button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -80,89 +80,238 @@
     .tab-frames iframe[hidden]{display:none}
     .web-warning{line-height:1.5}
     @media(max-width:700px){.tab-frames iframe{height:63vh;min-height:380px}.internal-tab{max-width:170px}.internal-tab .tab-switch{max-width:132px}}
+
+    /* Study Games discovery + official media embeds, no proxy or filtering bypass. */
+    .discovery-panel{background:linear-gradient(145deg,#111e32,#101622);border:1px solid #354767;border-radius:20px;padding:22px}
+    .discovery-panel h2{font-size:22px;margin:0 0 6px}
+    .discovery-panel p{margin:0 0 16px;color:#b2c2df;font-size:14px}
+    .search-note{font-size:13px;color:var(--muted);margin:9px 0 0}
+    .popular-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:17px}
+    .popular-grid a{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;padding:12px;border:1px solid #3c4a67;background:#162239;color:#eef3ff;border-radius:12px;font-size:14px;font-weight:740}
+    .popular-grid a:hover{border-color:#7d9efe;background:#1e3051}
+    .popular-grid .emoji{font-size:23px}
+    .media-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr);gap:16px}
+    .media-panel{border:1px solid #394969;background:#111a2c;border-radius:18px;padding:18px;min-width:0}
+    .media-panel h3{margin:0 0 9px;font-size:19px}
+    .media-panel p{font-size:13px;color:#b5c8e6;margin:0 0 13px}
+    .media-entry{display:flex;gap:8px;flex-wrap:wrap}
+    .media-entry input{background:#0d1525;border:1px solid #486084;padding:12px;color:white;border-radius:11px;flex:1 1 170px;min-width:0}
+    .media-entry button{background:#9dbbff;border:0;border-radius:11px;padding:10px 16px;color:#07152d;font-weight:850}
+    .media-stage{border:1px solid #3c5173;background:#080d18;border-radius:14px;overflow:hidden;aspect-ratio:16/9;margin-top:16px;display:grid;place-items:center}
+    .media-stage iframe{width:100%;height:100%;display:block;border:0;grid-area:1/1}
+    .media-placeholder{text-align:center;color:#b0bfda;padding:22px;grid-area:1/1}
+    .media-placeholder b{display:block;color:#e9f0ff;font-size:19px;margin:9px 0 5px}
+    .media-status{font-size:13px;color:#b4c8e9;margin:12px 0 0;min-height:20px}
+    .media-open{color:#bad0ff;font-weight:760;display:inline-block;margin-top:10px;font-size:13px}
+    .media-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .media-tags span{border-radius:999px;border:1px solid #405270;background:#202c45;color:#c9dbf9;font-size:12px;padding:5px 9px}
+    .note-item{border-bottom:1px solid #28374e;padding:9px 0;color:#c6d5ec;font-size:13px}
+    .note-item:last-child{border-bottom:0}
+    .note-item b{color:#fff}
+    @media(max-width:820px){.popular-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.media-layout{grid-template-columns:1fr}}
+    @media(max-width:440px){.discovery-panel{padding:16px}.popular-grid a{padding:10px;font-size:12px}.media-panel{padding:13px}}
+
   </style>
-</head>
+<style>
+/* Home first with an accessible three-line menu */
+header{margin-bottom:25px}.header-actions{display:flex;align-items:center;gap:12px}
+.menu-toggle{width:49px;height:47px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:#17243b;color:#ecf2ff;border:1px solid #4b648d;border-radius:13px;box-shadow:0 8px 26px #0006;flex-shrink:0}
+.menu-toggle span{width:23px;height:2px;background:#f4f6fe;border-radius:3px;display:block}
+.menu-toggle:hover,.menu-toggle:focus-visible{background:#28476c;border-color:#a0bbfa}
+.menu-backdrop{position:fixed;inset:0;z-index:60;background:#02050dcc;backdrop-filter:blur(3px)}
+.site-menu{position:fixed;top:0;right:0;bottom:0;z-index:61;width:min(92vw,345px);overflow-y:auto;padding:24px 19px;background:#111b2d;border-left:1px solid #3f5278;box-shadow:-24px 0 90px #0009}
+.menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:25px}.menu-head strong{font-size:19px}
+.menu-close{background:#243657;color:#fff;border:1px solid #49618b;border-radius:11px;font-size:20px;padding:7px 12px}
+.menu-link{display:flex;align-items:center;text-align:left;width:100%;min-height:52px;gap:11px;padding:12px;border:1px solid transparent;border-radius:12px;background:none;color:#f1f5ff;font-size:15px;font-weight:690;margin:6px 0}
+.menu-link:hover,.menu-link[aria-current="page"]{background:#213454;border-color:#47628f}
+.menu-link-icon{display:grid;place-items:center;width:28px;font-size:23px;flex-shrink:0}
+.menu-footnote{font-size:12px;color:#aabbd6;border-top:1px solid #314361;padding-top:14px;margin-top:26px;line-height:1.5}
+.hero h1{font-size:clamp(31px,5vw,50px)}.hero p{max-width:770px}.hero{margin-bottom:12px}
+.home-chips{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 0}
+.home-chips span{padding:8px 11px;border:1px solid #395072;background:#131e31;color:#cce0ff;border-radius:999px;font-size:12px;font-weight:700}
+/* The star is a visible, accessible shortcut below the menu button. */
+.header-nav-stack{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
+.arcade-star{width:49px;height:45px;display:grid;place-items:center;border-radius:13px;border:1px solid #59618c;background:#1a2339;color:#ffdd7d;font-size:29px;line-height:1;box-shadow:0 8px 24px #0005}
+.arcade-star:hover,.arcade-star:focus-visible{background:#303c62;border-color:#ffdc80}
+.arcade-star[aria-pressed="true"]{color:#121727;background:#ffdc80;border-color:#ffeaaa}
+#subjects{margin-top:27px}#arcade{margin-top:5px}
+#studyPanel:not([hidden]){margin-top:20px}
+.viewer-address{margin:0 0 10px}.viewer-address + .hint{margin:0 0 15px}
+#discover,#mediaCenter,#webViewer,#savedLinksSection,#quickLinks,#captureLab{scroll-margin-top:14px}
+@media(max-width:700px){.header-pill{display:none}header{margin-bottom:15px}.home-chips span{font-size:11px}.hero p{font-size:14px}.site-menu{padding-top:30px}}
+</style></head>
 <body>
- <div class="wrap">
-  <header><div class="brand"><span class="mark" aria-hidden="true">✦</span> Study Games</div><div class="header-pill">MATH • SCIENCE • SOCIAL STUDIES • ELA • MORE</div></header>
-  <main>
-   <div class="hero">
-    <p class="eyebrow">Learning, practice, and play</p>
-    <h1>Learn something <span class="grad">new.</span></h1>
-    <p>Practice math, science, social studies, English language arts (ELA), and more through quick quizzes. You can also play classic browser games, save useful links, and open supported websites in tabs inside this page.</p>
-    <form id="addressForm" class="search" autocomplete="off"><input id="address" aria-label="Website address or search" placeholder="Search the web or enter a website address…" required><button type="submit">Go to website in Study Games ↓</button></form>
-    <div class="hint">New destinations open as tabs inside Study Games, not as new browser tabs. Sites that prevent embedded viewing will still refuse to display. School monitoring and filters continue to apply.</div>
-   </div>
+<div class="wrap">
+<header><div class="brand"><span aria-hidden="true" class="mark">✦</span> Study Games</div><div class="header-actions"><div class="header-pill">LEARN • PLAY • EXPLORE</div><div class="header-nav-stack"><button aria-controls="siteMenu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menuButton" title="Open menu" type="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button><button aria-label="Open Arcade games" aria-pressed="false" class="arcade-star" id="arcadeStar" title="Open Arcade games" type="button">★</button></div></div></header><div class="menu-backdrop" hidden="" id="menuBackdrop"></div><nav aria-label="Study Games navigation" class="site-menu" hidden="" id="siteMenu"><div class="menu-head"><strong>Explore Study Games</strong><button aria-label="Close menu" class="menu-close" id="menuClose" type="button">✕</button></div><button class="menu-link" data-nav="home" type="button"><span aria-hidden="true" class="menu-link-icon">⌂</span> Home — All study games</button><button class="menu-link" data-nav="search" type="button"><span aria-hidden="true" class="menu-link-icon">🦆</span> DuckDuckGo search</button><button class="menu-link" data-nav="videos" type="button"><span aria-hidden="true" class="menu-link-icon">▶</span> YouTube &amp; TikTok videos</button><button class="menu-link" data-nav="tabs" type="button"><span aria-hidden="true" class="menu-link-icon">▣</span> Website tabs</button><button class="menu-link" data-nav="popular" type="button"><span aria-hidden="true" class="menu-link-icon">🌐</span> Popular website links</button><button class="menu-link" data-nav="saved" type="button"><span aria-hidden="true" class="menu-link-icon">☆</span> My saved links</button><button class="menu-link" data-nav="lab" type="button"><span aria-hidden="true" class="menu-link-icon">▧</span> Screen Capture Lab</button><p class="menu-footnote">Websites follow their own embedding rules and your device’s normal network restrictions.</p></nav>
+<main>
 
 
-   <section id="webViewer" aria-labelledby="webHeading">
-    <div class="sec-head"><h2 id="webHeading">Study Games tabs</h2><span>One browser tab • Multiple internal pages</span></div>
-    <div class="web-panel">
-      <div class="internal-tabs" id="internalTabs" role="tablist" aria-label="Websites inside Study Games"></div>
-      <div class="web-toolbar">
-        <div class="web-toolbar-info"><strong id="webTitle">Ready to browse</strong><span class="web-location" id="webLocation">Your pages open in the area below</span></div>
-        <div class="web-actions">
-          <button type="button" id="testViewer">Open demo tab</button>
-          <button type="button" id="closeWeb">Close current tab</button>
-          <a id="externalOpen" href="https://example.com/" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Open original site ↗</a>
-        </div>
-      </div>
-      <div class="web-warning" id="viewerInfo">Only websites that permit embedding can display here. A blank frame or “refused to connect” usually means the destination does not allow it. This does not change school monitoring.</div>
-      <div id="viewerHelp" class="viewer-help" hidden><div><strong id="viewerHelpTitle">Website not showing?</strong><div id="viewerHelpText">This website may block being displayed inside another website. Study Games cannot override that restriction.</div></div><span>Try the demo tab to check the viewer</span></div>
-      <div class="web-placeholder" id="webPlaceholder"><div><div style="font-size:42px" aria-hidden="true">🌐</div><strong>Your website tabs will appear here</strong>Type a website address above and select “Go to website in Study Games.”</div></div>
-      <div id="tabFrames" class="tab-frames" aria-label="Embedded website tabs"></div>
-    </div>
-    <p class="hint" id="webStatus" role="status" aria-live="polite" style="margin-top:10px">Choose “Open demo tab” for a guaranteed working offline example.</p>
-   </section>
-
-   <section id="subjects" aria-labelledby="subjectsHeading">
-    <div class="sec-head"><h2 id="subjectsHeading">Study games by subject</h2><span>Quick quizzes • Instant feedback</span></div>
-    <div class="study-grid">
-     <article class="study-card"><div class="emblem" aria-hidden="true">🔢</div><h3>Math</h3><p>Fractions, algebra, percentages, and geometry.</p><button type="button" data-subject="math">Practice Math →</button></article>
-     <article class="study-card"><div class="emblem" aria-hidden="true">🔬</div><h3>Science</h3><p>Space, cells, energy, and the natural world.</p><button type="button" data-subject="science">Practice Science →</button></article>
-     <article class="study-card"><div class="emblem" aria-hidden="true">🏛️</div><h3>Social Studies</h3><p>History, government, and civics.</p><button type="button" data-subject="social">Practice Social Studies →</button></article>
-     <article class="study-card"><div class="emblem" aria-hidden="true">📖</div><h3>ELA</h3><p>Grammar, vocabulary, and reading skills.</p><button type="button" data-subject="ela">Practice ELA →</button></article>
-     <article class="study-card"><div class="emblem" aria-hidden="true">🌎</div><h3>Geography & More</h3><p>Maps, countries, and computer science basics.</p><button type="button" data-subject="more">Explore More →</button></article>
-    </div>
-   </section>
-  <section id="studyPanel" class="study-panel" aria-labelledby="studyTitle" hidden>
-   <div class="dialog-top"><h2 id="studyTitle">Study Challenge</h2><button class="close" id="closeStudy" type="button" aria-label="Close study challenge">✕</button></div>
-   <div id="studyArea">
-    <div class="quiz-top"><span id="quizStep">Question 1 of 7</span><span id="quizScore">Score: 0</span></div>
-    <div class="progress-track" aria-label="Quiz progress"><div id="quizProgress" class="progress-fill"></div></div>
-    <p id="quizQuestion" class="quiz-question"></p>
-    <div id="quizChoices" class="quiz-choices" role="group" aria-label="Answer choices"></div>
-    <p id="quizFeedback" class="quiz-feedback" role="status" aria-live="polite"></p>
-    <button id="quizNext" class="quiz-next" type="button" disabled>Next question →</button>
-   </div>
-  </section>
-   <section><div class="sec-head"><h2>More games</h2><span>Play instantly • No installation</span></div><div class="grid">
-    <article class="game-card"><div class="game-icon" style="background:#214638">🐍</div><h3>Neon Snake</h3><p>Collect the glowing snacks. Don't run into the walls or yourself.</p><button type="button" data-game="snake">Play Snake →</button></article>
-    <article class="game-card"><div class="game-icon" style="background:#31366b">⭕</div><h3>Tic-Tac-Toe</h3><p>Take turns with a friend on the same device. Get three in a row.</p><button type="button" data-game="ttt">Play Tic-Tac-Toe →</button></article>
-    <article class="game-card"><div class="game-icon" style="background:#4c304c">🃏</div><h3>Memory Flip</h3><p>Reveal the cards and find all eight matching pairs.</p><button type="button" data-game="memory">Play Memory →</button></article>
-    <article class="game-card"><div class="game-icon" style="background:#324b53">⚡</div><h3>Reaction Rush</h3><p>Wait for green, then click as quickly as you can.</p><button type="button" data-game="reaction">Play Reaction Rush →</button></article>
-   </div></section>
-
-   <!-- Embedded screen capture lab -->
-   <section aria-labelledby="labTitle">
-     <div class="sec-head"><h2 id="labTitle">Screen Capture Lab</h2><span>Interactive educational simulator</span></div>
-     <div class="lab-teaser"><div><h3>See how previews can fail</h3><p>Compare a moving scene to an example preview. Try normal, black, frozen, and delayed preview modes. All effects exist only in the demonstration — they do not hide your screen from GoGuardian or another recorder.</p></div><button id="openLab" type="button">Launch simulator ↗</button></div>
-   </section>
-   <section aria-labelledby="savedTitle"><div class="sec-head"><h2 id="savedTitle">My saved links</h2><span>Save any normal study or game link</span></div>
-    <form id="saveForm" class="search" autocomplete="off"><input id="gameName" aria-label="Link name" placeholder="Website name" maxlength="50" required><input id="gameUrl" aria-label="Game website link" placeholder="https://example.com/game" required><button type="submit">Add link</button></form>
-    <p id="saveMessage" class="hint" role="status">Links are stored only in this browser. Select a saved link to open an internal Study Games tab.</p>
-    <div id="savedLinks" class="saved-links"></div>
-   </section>
-   <section><div class="sec-head"><h2>Quick links</h2><span>Popular creative & learning sites</span></div><nav class="links" aria-label="Quick links"><a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer">Scratch</a><a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a><a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer">Khan Academy</a><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a></nav></section>
-  </main><p class="foot">Study Games includes educational quizzes, casual games, and a simulated screen-capture demonstration. It does not bypass school filters or change monitoring.</p>
- </div>
 
 
- <dialog id="gameDialog" aria-label="Game"><div class="dialog-top"><h2 id="gameTitle">Game</h2><button class="close" id="closeDialog" type="button" aria-label="Close game">✕</button></div><div id="gameContent"></div></dialog>
- <dialog id="labDialog" aria-label="Screen Capture Lab simulator"><div class="dialog-top"><h2>Screen Capture Lab</h2><button class="close" id="closeLab" type="button" aria-label="Close simulator">✕</button></div><p class="lab-notice">Simulation only — this does not change the way other software captures your screen.</p><iframe id="labFrame" title="Interactive screen capture simulator" sandbox="allow-scripts" loading="lazy"></iframe></dialog>
- <script>
+
+
+
+<!-- Embedded screen capture lab -->
+
+
+
+<div class="hero" data-screen="home" id="homeHero">
+<p class="eyebrow">Welcome to Study Games</p>
+<h1>Pick a subject. <span class="grad">Start playing.</span></h1>
+<p>Start with Math, Science, Social Studies, ELA, or Geography below. Tap the ★ star under the ☰ menu to open Arcade games. Use the menu for DuckDuckGo search, videos, website tabs, and more.</p>
+
+
+<div aria-label="Study Games features" class="home-chips"><span>🔢 Math</span><span>🔬 Science</span><span>🏛️ Social Studies</span><span>📖 ELA</span><span>🌎 Geography</span></div></div><section aria-labelledby="subjectsHeading" data-screen="home" id="subjects" tabindex="-1">
+<div class="sec-head"><h2 id="subjectsHeading">Study games by subject</h2><span>Quick quizzes • Instant feedback</span></div>
+<div class="study-grid">
+<article class="study-card"><div aria-hidden="true" class="emblem">🔢</div><h3>Math</h3><p>Fractions, algebra, percentages, and geometry.</p><button data-subject="math" type="button">Practice Math →</button></article>
+<article class="study-card"><div aria-hidden="true" class="emblem">🔬</div><h3>Science</h3><p>Space, cells, energy, and the natural world.</p><button data-subject="science" type="button">Practice Science →</button></article>
+<article class="study-card"><div aria-hidden="true" class="emblem">🏛️</div><h3>Social Studies</h3><p>History, government, and civics.</p><button data-subject="social" type="button">Practice Social Studies →</button></article>
+<article class="study-card"><div aria-hidden="true" class="emblem">📖</div><h3>ELA</h3><p>Grammar, vocabulary, and reading skills.</p><button data-subject="ela" type="button">Practice ELA →</button></article>
+<article class="study-card"><div aria-hidden="true" class="emblem">🌎</div><h3>Geography &amp; More</h3><p>Maps, countries, and computer science basics.</p><button data-subject="more" type="button">Explore More →</button></article>
+</div>
+</section><section aria-labelledby="studyTitle" class="study-panel" data-screen="home" hidden="" id="studyPanel">
+<div class="dialog-top"><h2 id="studyTitle">Study Challenge</h2><button aria-label="Close study challenge" class="close" id="closeStudy" type="button">✕</button></div>
+<div id="studyArea">
+<div class="quiz-top"><span id="quizStep">Question 1 of 7</span><span id="quizScore">Score: 0</span></div>
+<div aria-label="Quiz progress" class="progress-track"><div class="progress-fill" id="quizProgress"></div></div>
+<p class="quiz-question" id="quizQuestion"></p>
+<div aria-label="Answer choices" class="quiz-choices" id="quizChoices" role="group"></div>
+<p aria-live="polite" class="quiz-feedback" id="quizFeedback" role="status"></p>
+<button class="quiz-next" disabled="" id="quizNext" type="button">Next question →</button>
+</div>
+</section><section data-screen="arcade" hidden="" id="arcade" tabindex="-1"><div class="sec-head"><h2>★ Arcade games</h2><span>Play instantly • No installation</span></div><div class="grid">
+<article class="game-card"><div class="game-icon" style="background:#214638">🐍</div><h3>Neon Snake</h3><p>Collect the glowing snacks. Don't run into the walls or yourself.</p><button data-game="snake" type="button">Play Snake →</button></article>
+<article class="game-card"><div class="game-icon" style="background:#31366b">⭕</div><h3>Tic-Tac-Toe</h3><p>Take turns with a friend on the same device. Get three in a row.</p><button data-game="ttt" type="button">Play Tic-Tac-Toe →</button></article>
+<article class="game-card"><div class="game-icon" style="background:#4c304c">🃏</div><h3>Memory Flip</h3><p>Reveal the cards and find all eight matching pairs.</p><button data-game="memory" type="button">Play Memory →</button></article>
+<article class="game-card"><div class="game-icon" style="background:#324b53">⚡</div><h3>Reaction Rush</h3><p>Wait for green, then click as quickly as you can.</p><button data-game="reaction" type="button">Play Reaction Rush →</button></article>
+</div></section><section aria-labelledby="discoverHeading" data-screen="search" hidden="" id="discover">
+<div class="sec-head"><h2 id="discoverHeading">Discover the web</h2><span>DuckDuckGo search • Popular websites</span></div>
+<div class="discovery-panel">
+<h2>🦆 Search with DuckDuckGo</h2>
+<p>Search for YouTube, TikTok, Roblox, Instagram, Facebook, Snapchat, homework topics, or any public website. DuckDuckGo results open normally in a browser tab because the search engine does not allow its full results page to be embedded here.</p>
+<form action="https://duckduckgo.com/" autocomplete="off" class="search" id="ddgForm" method="GET" target="_blank">
+<input aria-label="Search on DuckDuckGo" name="q" placeholder="Search DuckDuckGo — e.g. YouTube Minecraft tutorials" required="" type="search"/>
+<button type="submit">Search DuckDuckGo ↗</button>
+</form>
+<p class="search-note">You can return to Study Games anytime. Searching does not unlock blocked sites.</p>
+<nav aria-label="Popular websites" class="popular-grid">
+<a href="https://www.youtube.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">▶️</span> YouTube ↗</a>
+<a href="https://www.tiktok.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">🎵</span> TikTok ↗</a>
+<a href="https://www.roblox.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">🎮</span> Roblox ↗</a>
+<a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">📸</span> Instagram ↗</a>
+<a href="https://www.facebook.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">👥</span> Facebook ↗</a>
+<a href="https://www.snapchat.com/" rel="noopener noreferrer" target="_blank"><span class="emoji">👻</span> Snapchat ↗</a>
+<a href="https://www.wikipedia.org/" rel="noopener noreferrer" target="_blank"><span class="emoji">📚</span> Wikipedia ↗</a>
+<a href="https://scratch.mit.edu/" rel="noopener noreferrer" target="_blank"><span class="emoji">🐱</span> Scratch ↗</a>
+</nav>
+</div>
+</section><section aria-labelledby="mediaHeading" data-screen="videos" hidden="" id="mediaCenter">
+<div class="sec-head"><h2 id="mediaHeading">Watch videos inside Study Games</h2><span>Official embeds • No extra browser tab</span></div>
+<div class="media-layout">
+<div class="media-panel">
+<h3>📺 Video player</h3>
+<p>Paste a direct YouTube video, TikTok video, or public Instagram post/reel link. If its creator and your network permit embedding, it can play here on the Study Games page.</p>
+<form autocomplete="off" class="media-entry" id="mediaForm">
+<input aria-label="Video or post URL" id="mediaUrl" placeholder="Paste a YouTube, TikTok, or Instagram link" required="" type="url"/>
+<button type="submit">Play here ▶</button>
+</form>
+<div aria-label="Embedded video player" class="media-stage" id="mediaStage">
+<div class="media-placeholder" id="mediaPlaceholder"><div aria-hidden="true" style="font-size:34px">▶</div><b>Ready for a video</b>Paste a video link above to load it here.</div>
+<iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen; web-share" allowfullscreen="" hidden="" id="mediaFrame" referrerpolicy="strict-origin-when-cross-origin" title="Embedded video"></iframe>
+</div>
+<p aria-live="polite" class="media-status" id="mediaStatus" role="status">This player uses official video embeds, not a web proxy.</p>
+<a class="media-open" hidden="" href="https://www.youtube.com/" id="mediaOriginal" rel="noopener noreferrer" target="_blank">Open this video on its original website ↗</a>
+<div class="media-tags"><span>YouTube videos</span><span>TikTok clips</span><span>Public Instagram posts</span></div>
+</div>
+<div class="media-panel">
+<h3>What works here?</h3>
+<div class="note-item"><b>YouTube:</b> Supported videos can play directly in the player. Some owners disable embedding.</div>
+<div class="note-item"><b>TikTok:</b> Individual public videos may play. The whole TikTok feed isn't embedded.</div>
+<div class="note-item"><b>Instagram:</b> Some public posts/reels may display. Sign-in or privacy settings may prevent playback.</div>
+<div class="note-item"><b>Roblox:</b> Use the Roblox shortcut to open its games normally; the Roblox client can't run inside a web player.</div>
+<div class="note-item"><b>Facebook, Snapchat, and more:</b> Search or use quick links. Their complete sites generally cannot be displayed inside an iframe.</div>
+<div class="note-item"><b>School settings:</b> A permitted embed may still be blocked by device or network rules. This site does not hide browsing or change monitoring.</div>
+</div>
+</div>
+</section><section aria-labelledby="webHeading" data-screen="tabs" hidden="" id="webViewer">
+<div class="sec-head"><h2 id="webHeading">Study Games tabs</h2><span>One browser tab • Multiple internal pages</span></div><form autocomplete="off" class="search viewer-address" id="addressForm"><input aria-label="Website address" id="address" placeholder="Website address (e.g. example.com)" required=""/><button type="submit">Open inside Study Games</button></form><p class="hint">Internal tabs display only websites that permit embedding. DuckDuckGo search, found in the menu, opens search results normally.</p>
+<div class="web-panel">
+<div aria-label="Websites inside Study Games" class="internal-tabs" id="internalTabs" role="tablist"></div>
+<div class="web-toolbar">
+<div class="web-toolbar-info"><strong id="webTitle">Ready to browse</strong><span class="web-location" id="webLocation">Your pages open in the area below</span></div>
+<div class="web-actions">
+<button id="testViewer" type="button">Open demo tab</button>
+<button id="closeWeb" type="button">Close current tab</button>
+<a aria-disabled="true" href="https://example.com/" id="externalOpen" rel="noopener noreferrer" tabindex="-1" target="_blank">Open original site ↗</a>
+</div>
+</div>
+<div class="web-warning" id="viewerInfo">Only websites that permit embedding can display here. A blank frame or “refused to connect” usually means the destination does not allow it. This does not change school monitoring.</div>
+<div class="viewer-help" hidden="" id="viewerHelp"><div><strong id="viewerHelpTitle">Website not showing?</strong><div id="viewerHelpText">This website may block being displayed inside another website. Study Games cannot override that restriction.</div></div><span>Try the demo tab to check the viewer</span></div>
+<div class="web-placeholder" id="webPlaceholder"><div><div aria-hidden="true" style="font-size:42px">🌐</div><strong>Your website tabs will appear here</strong>Type a website address above and select “Go to website in Study Games.”</div></div>
+<div aria-label="Embedded website tabs" class="tab-frames" id="tabFrames"></div>
+</div>
+<p aria-live="polite" class="hint" id="webStatus" role="status" style="margin-top:10px">Choose “Open demo tab” for a guaranteed working offline example.</p>
+</section><section aria-labelledby="savedTitle" data-screen="saved" hidden="" id="savedLinksSection"><div class="sec-head"><h2 id="savedTitle">My saved links</h2><span>Save any normal study or game link</span></div>
+<form autocomplete="off" class="search" id="saveForm"><input aria-label="Link name" id="gameName" maxlength="50" placeholder="Website name" required=""/><input aria-label="Game website link" id="gameUrl" placeholder="https://example.com/game" required=""/><button type="submit">Add link</button></form>
+<p class="hint" id="saveMessage" role="status">Links are stored only in this browser. Select a saved link to open an internal Study Games tab.</p>
+<div class="saved-links" id="savedLinks"></div>
+</section><section data-screen="popular" hidden="" id="quickLinks"><div class="sec-head"><h2>Quick links</h2><span>Popular creative &amp; learning sites</span></div><nav aria-label="Quick links" class="links"><a href="https://scratch.mit.edu/" rel="noopener noreferrer" target="_blank">Scratch</a><a href="https://www.wikipedia.org/" rel="noopener noreferrer" target="_blank">Wikipedia</a><a href="https://www.khanacademy.org/" rel="noopener noreferrer" target="_blank">Khan Academy</a><a href="https://www.google.com/" rel="noopener noreferrer" target="_blank">Google</a></nav></section><section aria-labelledby="labTitle" data-screen="lab" hidden="" id="captureLab">
+<div class="sec-head"><h2 id="labTitle">Screen Capture Lab</h2><span>Interactive educational simulator</span></div>
+<div class="lab-teaser"><div><h3>See how previews can fail</h3><p>Compare a moving scene to an example preview. Try normal, black, frozen, and delayed preview modes. All effects exist only in the demonstration — they do not hide your screen from GoGuardian or another recorder.</p></div><button id="openLab" type="button">Launch simulator ↗</button></div>
+</section></main><p class="foot">Study Games includes educational quizzes, casual games, DuckDuckGo search links, supported video embeds, and a simulated screen-capture demonstration. It does not bypass school filters or change monitoring.</p>
+</div>
+<dialog aria-label="Game" id="gameDialog"><div class="dialog-top"><h2 id="gameTitle">Game</h2><button aria-label="Close game" class="close" id="closeDialog" type="button">✕</button></div><div id="gameContent"></div></dialog>
+<dialog aria-label="Screen Capture Lab simulator" id="labDialog"><div class="dialog-top"><h2>Screen Capture Lab</h2><button aria-label="Close simulator" class="close" id="closeLab" type="button">✕</button></div><p class="lab-notice">Simulation only — this does not change the way other software captures your screen.</p><iframe id="labFrame" loading="lazy" sandbox="allow-scripts" title="Interactive screen capture simulator"></iframe></dialog>
+<script>
  (()=>{
   'use strict';
+
+  // Official supported media embeds only. Keep host names and IDs tightly validated.
+  const mediaForm=document.querySelector('#mediaForm');
+  const mediaFrame=document.querySelector('#mediaFrame');
+  const mediaPlaceholder=document.querySelector('#mediaPlaceholder');
+  const mediaStatus=document.querySelector('#mediaStatus');
+  const mediaOriginal=document.querySelector('#mediaOriginal');
+  function embedFromUrl(raw){
+    let source;
+    try{source=new URL(raw.trim());}catch{return {error:'Paste a full link starting with https://.'};}
+    if(source.protocol!=='https:' || source.username || source.password)return {error:'Use a normal HTTPS video link.'};
+    const host=source.hostname.toLowerCase().replace(/^www\./,'');
+    const path=source.pathname;
+    if(host==='youtube.com'||host==='m.youtube.com'||host==='youtube-nocookie.com'||host==='youtu.be'){
+      let id='';
+      if(host==='youtu.be')id=path.split('/')[1]||'';
+      else if(path==='/watch')id=source.searchParams.get('v')||'';
+      else if(/^\/(?:shorts|embed|live)\//.test(path))id=path.split('/')[2]||'';
+      if(!/^[A-Za-z0-9_-]{11}$/.test(id))return {error:'Enter a direct YouTube video link, not a channel, playlist, or search page.'};
+      return {embed:'https://www.youtube-nocookie.com/embed/'+id+'?rel=0', original:source.href, kind:'YouTube'};
+    }
+    if(host==='tiktok.com'||host==='m.tiktok.com'){
+      const found=path.match(/\/video\/(\d{10,25})(?:\/|$)/);
+      if(!found)return {error:'Use a full TikTok video URL, such as tiktok.com/@creator/video/123… . Short share links may need to be expanded first.'};
+      return {embed:'https://www.tiktok.com/embed/v2/'+found[1], original:source.href, kind:'TikTok'};
+    }
+    if(host==='instagram.com'){
+      const found=path.match(/^\/(p|reel|tv)\/([A-Za-z0-9_-]{5,40})(?:\/|$)/);
+      if(!found)return {error:'Use a direct public Instagram post or reel URL.'};
+      return {embed:'https://www.instagram.com/'+found[1]+'/'+found[2]+'/embed/',original:source.href,kind:'Instagram'};
+    }
+    return {error:'This player supports direct YouTube, TikTok, and public Instagram links. Use the popular-site links above for other websites.'};
+  }
+  mediaForm.addEventListener('submit',function(event){
+    event.preventDefault();
+    const result=embedFromUrl(document.querySelector('#mediaUrl').value);
+    if(result.error){mediaStatus.textContent=result.error;return;}
+    mediaFrame.src='about:blank';
+    mediaFrame.src=result.embed;
+    mediaFrame.hidden=false;
+    mediaPlaceholder.hidden=true;
+    mediaOriginal.href=result.original;
+    mediaOriginal.hidden=false;
+    mediaStatus.textContent=result.kind+' embed requested. If the player displays an error or stays blank, this video may not permit embedding or may be blocked by network settings. Use “Open this video” instead.';
+  });
+
   const $=(s,r=document)=>r.querySelector(s);
   const dialog=$('#gameDialog'),gameContent=$('#gameContent');
   let dispose=()=>{};
@@ -178,7 +327,7 @@
     try{
       if(/^https?:\/\//i.test(query))url=new URL(query);
       else if(/^[\w.-]+\.[a-z]{2,}(?::\d+)?(?:[\/\?#].*)?$/i.test(query) && !/\s/.test(query))url=new URL('https://'+query);
-      else url=new URL('https://www.google.com/search?q='+encodeURIComponent(query));
+      else return null;
       if(!['http:','https:'].includes(url.protocol)||!url.hostname||url.username||url.password)throw Error('Invalid address');
       return url;
     }catch{return null}
@@ -223,6 +372,7 @@
     refreshTabUi();
   }
   function addTab({url,label,html}){
+    if(window.studyGamesShowView)window.studyGamesShowView('tabs');
     // Limit resource use: opening a sixth tab closes the oldest.
     if(browserTabs.length>=5)closeTab(browserTabs[0].id);
     const frame=document.createElement('iframe');frame.title=label||'Embedded website';frame.loading='eager';frame.referrerPolicy='no-referrer';frame.allowFullscreen=true;
@@ -245,7 +395,7 @@
     e.preventDefault();
     const url=parseWebsite($('#address').value);
     if(url)loadWebsite(url.href);
-    else webStatus.textContent='Please enter a valid website address or search query.';
+    else webStatus.textContent='For website names or keywords, use the DuckDuckGo search bar above. This box accepts a website address.';
   });
   $('#testViewer').addEventListener('click',()=>{
     const html=`<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{margin:0;background:#f2f6ff;color:#182c4d;font:16px/1.6 system-ui,sans-serif}header{padding:22px;background:#dce7ff}main{max-width:550px;margin:48px auto;padding:28px;background:white;border:1px solid #c9d6eb;border-radius:18px;box-shadow:0 12px 36px #1a37691a}h1{margin:0 0 8px}button{border:0;border-radius:9px;background:#336cda;color:white;font:inherit;font-weight:800;padding:10px 16px;cursor:pointer}</style></head><body><header>📘 Study Games · Demo website</header><main><h1>✅ Internal tab is working</h1><p>This learning page is displayed inside Study Games, without opening a separate browser tab.</p><p>Sites that prohibit iframe embedding will still appear blank or show an error.</p><button id="count" onclick="this.textContent='Clicks: '+(++window.count|| (window.count=1))">Click to test</button></main></body></html>`;
@@ -315,9 +465,7 @@
   }
  })();
  </script>
-
-
-  <script>
+<script>
   /* Self-contained educational practice; answers are shown only after a choice. */
   (()=>{
    'use strict';
@@ -373,8 +521,7 @@
    byId('closeStudy').addEventListener('click',()=>{dlg.hidden=true;document.querySelector('#subjects').scrollIntoView({behavior:'smooth',block:'start'});});
   })();
   </script>
-
- <script>
+<script>
  /* Educational lab is fully embedded, works offline, and is isolated from the arcade. */
  (()=>{
   const dialog=document.querySelector('#labDialog');
@@ -389,5 +536,38 @@
   dialog.addEventListener('cancel',(event)=>{event.preventDefault();close()});
  })();
  </script>
-</body>
+<script>
+(()=>{
+ 'use strict';
+ const views={home:['homeHero','subjects'],arcade:['arcade'],search:['discover'],videos:['mediaCenter'],tabs:['webViewer'],popular:['quickLinks'],saved:['savedLinksSection'],lab:['captureLab']};
+ const star=document.getElementById('arcadeStar');
+ const menu=document.getElementById('siteMenu'),shade=document.getElementById('menuBackdrop'),trigger=document.getElementById('menuButton'),close=document.getElementById('menuClose');
+ const all=new Set(Object.values(views).flat());
+ let prevFocus=null;
+ function setMenu(open){
+  menu.hidden=!open;shade.hidden=!open;trigger.setAttribute('aria-expanded',String(open));
+  if(open){prevFocus=document.activeElement;close.focus()} else if(menu.contains(document.activeElement)){trigger.focus()}
+ }
+ function showView(view){
+  if(!views[view])view='home';
+  all.forEach(id=>{let n=document.getElementById(id);if(n)n.hidden=!views[view].includes(id)});
+  const quiz=document.getElementById('studyPanel');if(view!=='home')quiz.hidden=true;
+  menu.querySelectorAll('[data-nav]').forEach(b=>b.setAttribute('aria-current',b.dataset.nav===view?'page':'false'));
+  star.setAttribute('aria-pressed',String(view==='arcade'));
+  star.setAttribute('aria-label',view==='arcade'?'Return to Study Games homepage':'Open Arcade games');
+  star.title=view==='arcade'?'Return to Study Games homepage':'Open Arcade games';
+  setMenu(false);
+  window.scrollTo({top:0,behavior:'instant'});
+  const heading=document.querySelector(view==='home'?'#subjectsHeading':('#'+views[view][0]+' .sec-head h2'));
+  if(heading)heading.setAttribute('tabindex','-1');
+ }
+ window.studyGamesShowView=showView;
+ trigger.addEventListener('click',()=>setMenu(menu.hidden));
+ star.addEventListener('click',()=>showView(star.getAttribute('aria-pressed')==='true'?'home':'arcade'));
+ close.addEventListener('click',()=>setMenu(false));shade.addEventListener('click',()=>setMenu(false));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){e.preventDefault();setMenu(false)}});
+ menu.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.nav)));
+ menu.querySelector('[data-nav="home"]').setAttribute('aria-current','page');
+})();
+</script></body>
 </html>
